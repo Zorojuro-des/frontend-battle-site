@@ -24,7 +24,7 @@ Welcome to **EcoTech Solutions**, a responsive and innovative platform built for
 | Navbar + Section Linking | ✅ All headings in navbar linked to corresponding sections |
 | Light & Dark Mode | ✅ Seamless theme toggle implemented |
 | Minimum 6 Features | ✅ Over 6+ major features implemented |
-| Deployed Link | [Live Demo (example)](https://frontendbattlesite.tiiny.site) |
+| Deployed Link | [Live Demo ](https://frontendbattlesite.tiiny.site) |
 
 ---
 
