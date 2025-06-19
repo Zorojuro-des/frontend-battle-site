@@ -36,6 +36,50 @@
             50% { transform: translateY(-10px); }
         }
         
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+        }
+        
+        @keyframes slideOutLeft {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+        }
+        
         /* Light Mode Styles */
         .light-mode {
             background-color: #f9fafb;
@@ -279,6 +323,206 @@
             box-shadow: 0 0 0 2px #3b82f6;
             border-color: #3b82f6;
         }
+        
+        /* Filter button styles */
+        .filter-button {
+            transition: all 0.3s ease;
+        }
+        
+        .filter-button.active {
+            transform: scale(1.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .dark-mode .filter-button.active {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Enhanced Testimonial Carousel Styles */
+        .testimonial-carousel {
+            position: relative;
+            overflow: hidden;
+            height: 500px;
+        }
+        
+        .testimonial-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .testimonial-slide.prev {
+            transform: translateX(-100%);
+        }
+        
+        .testimonial-slide.next {
+            transform: translateX(100%);
+        }
+        
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark-mode .carousel-nav {
+            background: rgba(31, 41, 55, 0.95);
+            color: white;
+        }
+        
+        .carousel-nav:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark-mode .carousel-nav:hover {
+            background: rgba(31, 41, 55, 1);
+        }
+        
+        .carousel-nav.prev {
+            left: -30px;
+        }
+        
+        .carousel-nav.next {
+            right: -30px;
+        }
+        
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+        }
+        
+        .carousel-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #d1d5db;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .carousel-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            background: #10b981;
+            transform: scale(1.3);
+        }
+        
+        .carousel-dot.active::before {
+            background: white;
+        }
+        
+        .dark-mode .carousel-dot {
+            background: #4b5563;
+        }
+        
+        .dark-mode .carousel-dot.active {
+            background: #10b981;
+        }
+        
+        /* Customer section enhancements */
+        .customer-logo {
+            transition: all 0.4s ease;
+            filter: grayscale(100%);
+            opacity: 0.7;
+        }
+        
+        .customer-logo:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: scale(1.1) rotate(2deg);
+        }
+        
+        .customer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .customer-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
+        }
+        
+        .dark-mode .customer-card {
+            background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .customer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .dark-mode .customer-card:hover {
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        
+        /* Quote styles */
+        .quote-mark {
+            font-size: 4rem;
+            line-height: 1;
+            color: #10b981;
+            opacity: 0.3;
+        }
+        
+        /* Section boundary fix */
+        .section-boundary {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .section-boundary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: transparent;
+        }
     </style>
 </head>
 <body class="font-sans transition-all duration-300">
@@ -313,6 +557,8 @@
                     <a href="#impact" class="nav-link text-secondary hover:text-primary px-1">Impact</a>
                     <a href="#solutions" class="nav-link text-secondary hover:text-primary px-1">Solutions</a>
                     <a href="#projects" class="nav-link text-secondary hover:text-primary px-1">Projects</a>
+                    <a href="#testimonials" class="nav-link text-secondary hover:text-primary px-1">Testimonials</a>
+                    <a href="#customers" class="nav-link text-secondary hover:text-primary px-1">Customers</a>
                     <a href="#contact" class="nav-link text-secondary hover:text-primary px-1">Contact</a>
                     <div id="themeToggle" class="theme-toggle"></div>
                 </div>
@@ -335,6 +581,8 @@
                 <a href="#impact" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:text-primary hover:bg-gray-100 dark-mode:hover:bg-gray-700">Impact</a>
                 <a href="#solutions" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:text-primary hover:bg-gray-100 dark-mode:hover:bg-gray-700">Solutions</a>
                 <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:text-primary hover:bg-gray-100 dark-mode:hover:bg-gray-700">Projects</a>
+                <a href="#testimonials" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:text-primary hover:bg-gray-100 dark-mode:hover:bg-gray-700">Testimonials</a>
+                <a href="#customers" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:text-primary hover:bg-gray-100 dark-mode:hover:bg-gray-700">Customers</a>
                 <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:text-primary hover:bg-gray-100 dark-mode:hover:bg-gray-700">Contact</a>
             </div>
         </div>
@@ -362,7 +610,7 @@
                     <button id="heroButton" class="ripple-effect bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300">
                         Explore Our Impact
                     </button>
-                    <button class="ripple-effect border-2 border-white text-white hover:bg-white hover:text-green-900 font-bold py-4 px-8 rounded-full text-lg transition-all duration-300">
+                    <button id="viewSolutionsButton" class="ripple-effect border-2 border-white text-white hover:bg-white hover:text-green-900 font-bold py-4 px-8 rounded-full text-lg transition-all duration-300">
                         View Solutions
                     </button>
                 </div>
@@ -384,7 +632,6 @@
                 <div class="space-y-4">
                     <div class="brand-card p-6 rounded-xl flex items-center justify-between hover:bg-opacity-20 transition-all duration-300">
                         <div class="flex items-center space-x-4">
-                            <!-- <input type="checkbox" class="w-5 h-5 rounded border-gray-300"> -->
                             <div class="flex items-center space-x-3">
                                 <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
                                     <span class="text-white text-xs font-bold">EC</span>
@@ -400,7 +647,6 @@
                     
                     <div class="brand-card p-6 rounded-xl flex items-center justify-between hover:bg-opacity-20 transition-all duration-300">
                         <div class="flex items-center space-x-4">
-                            <!-- <input type="checkbox" class="w-5 h-5 rounded border-gray-300"> -->
                             <div class="flex items-center space-x-3">
                                 <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
                                     <span class="text-white text-xs font-bold">IC</span>
@@ -416,7 +662,6 @@
                     
                     <div class="brand-card p-6 rounded-xl flex items-center justify-between hover:bg-opacity-20 transition-all duration-300">
                         <div class="flex items-center space-x-4">
-                            <!-- <input type="checkbox" class="w-5 h-5 rounded border-gray-300"> -->
                             <div class="flex items-center space-x-3">
                                 <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
                                     <span class="text-white text-xs font-bold">GA</span>
@@ -594,16 +839,16 @@
                         <h3 class="text-lg font-medium text-primary mb-3">Filter by Facility Type</h3>
                         <div class="flex flex-wrap gap-3">
                             <span class="text-sm text-secondary">Type</span>
-                            <button class="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm hover:bg-green-200 transition-colors">Green Retrofit</button>
-                            <button class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm hover:bg-blue-200 transition-colors">New Sustainable Build</button>
-                            <button class="px-4 py-2 bg-purple-600 text-white rounded-full text-sm hover:bg-purple-700 transition-colors">All Facilities</button>
+                            <button class="filter-button px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm hover:bg-green-200 transition-colors" data-filter="green-retrofit">Green Retrofit</button>
+                            <button class="filter-button px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm hover:bg-blue-200 transition-colors" data-filter="new-build">New Sustainable Build</button>
+                            <button class="filter-button px-4 py-2 bg-purple-600 text-white rounded-full text-sm hover:bg-purple-700 transition-colors active" data-filter="all">All Facilities</button>
                         </div>
                     </div>
                     <div>
                         <div class="flex flex-wrap gap-3">
                             <span class="text-sm text-secondary">Status</span>
-                            <button class="px-4 py-2 bg-green-600 text-white rounded-full text-sm hover:bg-green-700 transition-colors" data-status="Operational">Operational</button>
-                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm hover:bg-gray-300 transition-colors" data-status="Under Construction">Under Construction</button>
+                            <button class="filter-button px-4 py-2 bg-green-600 text-white rounded-full text-sm hover:bg-green-700 transition-colors active" data-status="operational">Operational</button>
+                            <button class="filter-button px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm hover:bg-gray-300 transition-colors" data-status="construction">Under Construction</button>
                         </div>
                     </div>
                 </div>
@@ -726,8 +971,325 @@
             </div>
         </section>
         
+        <!-- Enhanced Testimonials Carousel Section -->
+        <section id="testimonials" class="min-h-screen py-20 px-4 section-gray snap-start">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">What Our Clients Say</h2>
+                <p class="text-center text-secondary mb-16 text-lg">Hear from industry leaders who have transformed their operations with our sustainable technology solutions</p>
+                
+                <div class="testimonial-carousel relative max-w-4xl mx-auto">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-slide active">
+                        <div class="card-light p-8 md:p-12 rounded-xl shadow-xl border-light text-center">
+                            <div class="quote-mark absolute top-4 left-4">"</div>
+                            <div class="mb-8">
+                                <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-white text-2xl font-bold">MS</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-primary mb-2">Michael Stevens</h3>
+                                <p class="text-secondary">CEO, GreenTech Industries</p>
+                            </div>
+                            <blockquote class="text-lg md:text-xl text-primary mb-6 italic">
+                                "EcoTech Solutions transformed our entire energy infrastructure. We've reduced our carbon footprint by 45% while cutting operational costs by 30%. Their smart grid technology is revolutionary."
+                            </blockquote>
+                            <div class="flex justify-center space-x-1">
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-slide">
+                        <div class="card-light p-8 md:p-12 rounded-xl shadow-xl border-light text-center">
+                            <div class="quote-mark absolute top-4 left-4">"</div>
+                            <div class="mb-8">
+                                <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-teal-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-white text-2xl font-bold">SJ</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-primary mb-2">Sarah Johnson</h3>
+                                <p class="text-secondary">Sustainability Director, Metro City Council</p>
+                            </div>
+                            <blockquote class="text-lg md:text-xl text-primary mb-6 italic">
+                                "The carbon tracking system has been a game-changer for our city's sustainability goals. Real-time monitoring and automated reporting have made compliance effortless and transparent."
+                            </blockquote>
+                            <div class="flex justify-center space-x-1">
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-slide">
+                        <div class="card-light p-8 md:p-12 rounded-xl shadow-xl border-light text-center">
+                            <div class="quote-mark absolute top-4 left-4">"</div>
+                            <div class="mb-8">
+                                <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-white text-2xl font-bold">DR</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-primary mb-2">Dr. Robert Chen</h3>
+                                <p class="text-secondary">Chief Technology Officer, FutureCorp</p>
+                            </div>
+                            <blockquote class="text-lg md:text-xl text-primary mb-6 italic">
+                                "Their AI climate predictor has revolutionized our long-term planning. We can now anticipate environmental impacts and optimize our sustainability strategies with unprecedented accuracy."
+                            </blockquote>
+                            <div class="flex justify-center space-x-1">
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial-slide">
+                        <div class="card-light p-8 md:p-12 rounded-xl shadow-xl border-light text-center">
+                            <div class="quote-mark absolute top-4 left-4">"</div>
+                            <div class="mb-8">
+                                <div class="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-white text-2xl font-bold">EM</span>
+                                </div>
+                                <h3 class="text-xl font-bold text-primary mb-2">Elena Martinez</h3>
+                                <p class="text-secondary">Operations Manager, EcoManufacturing Ltd.</p>
+                            </div>
+                            <blockquote class="text-lg md:text-xl text-primary mb-6 italic">
+                                "The waste-to-energy solution has completely transformed our manufacturing process. We've eliminated 95% of our waste while generating clean energy for our operations."
+                            </blockquote>
+                            <div class="flex justify-center space-x-1">
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                                <span class="text-yellow-400 text-xl">★</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Buttons -->
+                    <button class="carousel-nav prev" id="prevBtn">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <button class="carousel-nav next" id="nextBtn">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Carousel Indicators -->
+                <div class="carousel-indicators">
+                    <div class="carousel-dot active" data-slide="0"></div>
+                    <div class="carousel-dot" data-slide="1"></div>
+                    <div class="carousel-dot" data-slide="2"></div>
+                    <div class="carousel-dot" data-slide="3"></div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Enhanced Know Our Customers Section -->
+        <section id="customers" class="min-h-screen py-20 px-4 section-light snap-start section-boundary">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Our Global Impact Partners</h2>
+                <p class="text-center text-secondary mb-16 text-lg">Collaborating with visionary organizations across industries to create a sustainable future</p>
+                
+                <!-- Enhanced Customer Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+                    <div class="text-center customer-card">
+                        <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent mb-2">500+</div>
+                        <div class="text-secondary font-medium">Global Partners</div>
+                        <div class="text-xs text-secondary mt-1">Across 6 continents</div>
+                    </div>
+                    <div class="text-center customer-card">
+                        <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent mb-2">50+</div>
+                        <div class="text-secondary font-medium">Countries</div>
+                        <div class="text-xs text-secondary mt-1">Worldwide presence</div>
+                    </div>
+                    <div class="text-center customer-card">
+                        <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-2">98%</div>
+                        <div class="text-secondary font-medium">Success Rate</div>
+                        <div class="text-xs text-secondary mt-1">Client satisfaction</div>
+                    </div>
+                    <div class="text-center customer-card">
+                        <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent mb-2">15+</div>
+                        <div class="text-secondary font-medium">Years</div>
+                        <div class="text-xs text-secondary mt-1">Industry expertise</div>
+                    </div>
+                </div>
+                
+                <!-- Enhanced Customer Showcase -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold text-center mb-12 text-primary">Trusted by Industry Leaders</h3>
+                    <div class="customer-grid">
+                        <!-- Customer 1 -->
+                        <div class="customer-card customer-logo">
+                            <div class="w-20 h-20 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-white font-bold text-2xl">GT</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-primary mb-2">GreenTech Industries</h4>
+                            <p class="text-sm text-secondary mb-3">Manufacturing & Energy</p>
+                            <div class="flex justify-center space-x-2 text-xs">
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full">Smart Grid</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">IoT</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Customer 2 -->
+                        <div class="customer-card customer-logo">
+                            <div class="w-20 h-20 bg-gradient-to-r from-green-600 to-green-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-white font-bold text-2xl">MC</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-primary mb-2">Metro City Council</h4>
+                            <p class="text-sm text-secondary mb-3">Government & Public Sector</p>
+                            <div class="flex justify-center space-x-2 text-xs">
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full">Carbon Tracking</span>
+                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Analytics</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Customer 3 -->
+                        <div class="customer-card customer-logo">
+                            <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-purple-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-white font-bold text-2xl">FC</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-primary mb-2">FutureCorp</h4>
+                            <p class="text-sm text-secondary mb-3">Technology & Innovation</p>
+                            <div class="flex justify-center space-x-2 text-xs">
+                                <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">AI Climate</span>
+                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Prediction</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Customer 4 -->
+                        <div class="customer-card customer-logo">
+                            <div class="w-20 h-20 bg-gradient-to-r from-orange-600 to-orange-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-white font-bold text-2xl">EM</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-primary mb-2">EcoManufacturing</h4>
+                            <p class="text-sm text-secondary mb-3">Sustainable Manufacturing</p>
+                            <div class="flex justify-center space-x-2 text-xs">
+                                <span class="bg-teal-100 text-teal-800 px-2 py-1 rounded-full">Waste-to-Energy</span>
+                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full">Clean Tech</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Customer 5 -->
+                        <div class="customer-card customer-logo">
+                            <div class="w-20 h-20 bg-gradient-to-r from-teal-600 to-teal-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-white font-bold text-2xl">SE</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-primary mb-2">Sustainable Energy Co.</h4>
+                            <p class="text-sm text-secondary mb-3">Renewable Energy</p>
+                            <div class="flex justify-center space-x-2 text-xs">
+                                <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Solar</span>
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Wind</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Customer 6 -->
+                        <div class="customer-card customer-logo">
+                            <div class="w-20 h-20 bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                                <span class="text-white font-bold text-2xl">AI</span>
+                            </div>
+                            <h4 class="text-lg font-bold text-primary mb-2">AI Innovations Ltd.</h4>
+                            <p class="text-sm text-secondary mb-3">Artificial Intelligence</p>
+                            <div class="flex justify-center space-x-2 text-xs">
+                                <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">Machine Learning</span>
+                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Optimization</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Customer Success Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Success Story 1 -->
+                    <div class="card-light p-6 rounded-xl border-light card-hover-effect">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg flex items-center justify-center mr-4">
+                                <span class="text-white font-bold">GT</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-primary">GreenTech Industries</h3>
+                                <p class="text-sm text-secondary">Manufacturing Excellence</p>
+                            </div>
+                        </div>
+                        <p class="text-secondary mb-4">Implemented our smart grid solution across 15 facilities, achieving remarkable sustainability milestones and operational efficiency.</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-green-600 font-semibold text-sm">45% CO₂ Reduction</span>
+                                <span class="text-blue-600 font-semibold text-sm">$2.3M Saved</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-purple-600 font-semibold text-sm">15 Facilities</span>
+                                <span class="text-orange-600 font-semibold text-sm">2 Years ROI</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Success Story 2 -->
+                    <div class="card-light p-6 rounded-xl border-light card-hover-effect">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-700 rounded-lg flex items-center justify-center mr-4">
+                                <span class="text-white font-bold">MC</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-primary">Metro City Council</h3>
+                                <p class="text-sm text-secondary">Smart City Initiative</p>
+                            </div>
+                        </div>
+                        <p class="text-secondary mb-4">Deployed comprehensive carbon tracking system enabling transparent environmental monitoring across the entire metropolitan area.</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-green-600 font-semibold text-sm">500+ Buildings</span>
+                                <span class="text-purple-600 font-semibold text-sm">Real-time Data</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-blue-600 font-semibold text-sm">24/7 Monitoring</span>
+                                <span class="text-orange-600 font-semibold text-sm">30% Efficiency</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Success Story 3 -->
+                    <div class="card-light p-6 rounded-xl border-light card-hover-effect">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-700 rounded-lg flex items-center justify-center mr-4">
+                                <span class="text-white font-bold">EM</span>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-primary">EcoManufacturing</h3>
+                                <p class="text-sm text-secondary">Zero Waste Pioneer</p>
+                            </div>
+                        </div>
+                        <p class="text-secondary mb-4">Revolutionary waste-to-energy implementation achieving near-zero waste production while generating sustainable power for operations.</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center justify-between">
+                                <span class="text-green-600 font-semibold text-sm">95% Waste Converted</span>
+                                <span class="text-orange-600 font-semibold text-sm">60% Self-Powered</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-blue-600 font-semibold text-sm">500 Tons/Day</span>
+                                <span class="text-purple-600 font-semibold text-sm">Clean Energy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
         <!-- Contact Section -->
-        <section id="contact" class="min-h-screen flex items-center justify-center section-gray snap-start">
+        <section id="contact" class="min-h-screen flex items-center justify-center section-gray snap-start section-boundary">
             <div class="max-w-md w-full card-light p-10 rounded-xl shadow-lg mx-4 border-light">
                 <h2 class="text-3xl font-bold text-center mb-4 text-primary">Partner With Us</h2>
                 <p class="text-center text-secondary mb-8">Join our mission to create sustainable technology solutions for a greener future</p>
@@ -836,6 +1398,34 @@
     </footer>
 
     <script>
+        // Chart data sets for different filters
+        const chartData = {
+            all: {
+                labels: ['Solar Farm A', 'Wind Farm B', 'Hydro Plant C', 'Geothermal D', 'Biomass E', 'Smart Grid F', 'Battery Hub G', 'Green Building H', 'Waste Plant I', 'Carbon Capture J', 'EV Station K', 'Heat Pump L', 'LED Retrofit M', 'Smart Meter N', 'Insulation O', 'HVAC Upgrade P', 'Water Recycle Q', 'Compost R', 'Solar Roof S', 'Wind Turbine T'],
+                data: [125, 89, 234, 156, 178, 45, 67, 123, 89, 298, 234, 145, 78, 56, 34, 123, 89, 67, 156, 134]
+            },
+            'green-retrofit': {
+                labels: ['LED Retrofit M', 'Smart Meter N', 'Insulation O', 'HVAC Upgrade P', 'Water Recycle Q', 'Heat Pump L', 'Solar Roof S'],
+                data: [78, 56, 34, 123, 89, 145, 156]
+            },
+            'new-build': {
+                labels: ['Solar Farm A', 'Wind Farm B', 'Hydro Plant C', 'Geothermal D', 'Smart Grid F', 'Battery Hub G', 'Green Building H', 'Waste Plant I', 'Carbon Capture J', 'EV Station K', 'Wind Turbine T'],
+                data: [125, 89, 234, 156, 45, 67, 123, 89, 298, 234, 134]
+            },
+            operational: {
+                labels: ['Solar Farm A', 'Wind Farm B', 'Hydro Plant C', 'Smart Grid F', 'Battery Hub G', 'Green Building H', 'Waste Plant I', 'EV Station K', 'Heat Pump L', 'LED Retrofit M', 'Smart Meter N', 'Insulation O', 'HVAC Upgrade P', 'Water Recycle Q', 'Solar Roof S'],
+                data: [125, 89, 234, 45, 67, 123, 89, 234, 145, 78, 56, 34, 123, 89, 156]
+            },
+            construction: {
+                labels: ['Geothermal D', 'Biomass E', 'Carbon Capture J', 'Compost R', 'Wind Turbine T'],
+                data: [156, 178, 298, 67, 134]
+            }
+        };
+
+        let emissionsChart;
+        let currentSlide = 0;
+        const totalSlides = 4;
+
         // Wait for DOM to load
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize theme
@@ -858,7 +1448,7 @@
                 document.querySelector('html').style.scrollBehavior = 'smooth';
             }, 2500);
             
-            // Theme toggle functionality - COMPLETELY FIXED
+            // Theme toggle functionality
             const themeToggle = document.getElementById('themeToggle');
             const mobileThemeToggle = document.getElementById('mobileThemeToggle');
             
@@ -874,6 +1464,9 @@
                     body.classList.add('dark-mode');
                     localStorage.setItem('theme', 'dark');
                 }
+                
+                // Update chart theme
+                setTimeout(updateChartTheme, 100);
             }
             
             themeToggle.addEventListener('click', toggleTheme);
@@ -919,6 +1512,11 @@
                 document.getElementById('sustainability').scrollIntoView({ behavior: 'smooth' });
             });
             
+            // View Solutions button
+            document.getElementById('viewSolutionsButton').addEventListener('click', function() {
+                document.getElementById('solutions').scrollIntoView({ behavior: 'smooth' });
+            });
+            
             // Smooth scrolling for navigation links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
@@ -936,107 +1534,206 @@
             });
             
             // Initialize Chart.js for emissions chart
-            const ctx = document.getElementById('emissionsChart').getContext('2d');
-            const emissionsChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Solar Farm A', 'Wind Farm B', 'Hydro Plant C', 'Geothermal D', 'Biomass E', 'Smart Grid F', 'Battery Hub G', 'Green Building H', 'Waste Plant I', 'Carbon Capture J', 'EV Station K', 'Heat Pump L', 'LED Retrofit M', 'Smart Meter N', 'Insulation O', 'HVAC Upgrade P', 'Water Recycle Q', 'Compost R', 'Solar Roof S', 'Wind Turbine T'],
-                    datasets: [{
-                        label: 'Carbon Intensity (kgCO₂e/m²)',
-                        data: [125, 89, 234, 156, 178, 45, 67, 123, 89, 298, 234, 145, 78, 56, 34, 123, 89, 67, 156, 134],
-                        backgroundColor: function(context) {
-                            const value = context.parsed.y;
-                            if (value < 100) return '#10b981'; // Green for excellent
-                            if (value < 200) return '#3b82f6'; // Blue for good
-                            if (value < 300) return '#f59e0b'; // Yellow for moderate
-                            return '#ef4444'; // Red for needs improvement
-                        },
-                        borderWidth: 0,
-                        borderRadius: 4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            titleColor: 'white',
-                            bodyColor: 'white',
-                            borderColor: '#10b981',
-                            borderWidth: 1
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            max: 350,
-                            grid: {
-                                color: function(context) {
-                                    return body.classList.contains('dark-mode') ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
-                                }
+            function initChart(filterType = 'all') {
+                const ctx = document.getElementById('emissionsChart').getContext('2d');
+                
+                if (emissionsChart) {
+                    emissionsChart.destroy();
+                }
+                
+                const data = chartData[filterType];
+                
+                emissionsChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.labels,
+                        datasets: [{
+                            label: 'Carbon Intensity (kgCO₂e/m²)',
+                            data: data.data,
+                            backgroundColor: function(context) {
+                                const value = context.parsed.y;
+                                if (value < 100) return '#10b981'; // Green for excellent
+                                if (value < 200) return '#3b82f6'; // Blue for good
+                                if (value < 300) return '#f59e0b'; // Yellow for moderate
+                                return '#ef4444'; // Red for needs improvement
                             },
-                            ticks: {
-                                color: function() {
-                                    return body.classList.contains('dark-mode') ? '#d1d5db' : '#6b7280';
-                                }
-                            }
-                        },
-                        x: {
-                            grid: {
+                            borderWidth: 0,
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
                                 display: false
                             },
-                            ticks: {
-                                color: function() {
-                                    return body.classList.contains('dark-mode') ? '#d1d5db' : '#6b7280';
+                            tooltip: {
+                                backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                                titleColor: 'white',
+                                bodyColor: 'white',
+                                borderColor: '#10b981',
+                                borderWidth: 1
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 350,
+                                grid: {
+                                    color: function(context) {
+                                        return body.classList.contains('dark-mode') ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+                                    }
                                 },
-                                maxRotation: 45
+                                ticks: {
+                                    color: function() {
+                                        return body.classList.contains('dark-mode') ? '#d1d5db' : '#6b7280';
+                                    }
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                },
+                                ticks: {
+                                    color: function() {
+                                        return body.classList.contains('dark-mode') ? '#d1d5db' : '#6b7280';
+                                    },
+                                    maxRotation: 45
+                                }
+                            }
+                        },
+                        elements: {
+                            bar: {
+                                borderRadius: 4
                             }
                         }
-                    },
-                    elements: {
-                        bar: {
-                            borderRadius: 4
-                        }
                     }
-                }
+                });
+                
+                // Add reference lines to chart
+                const chart = emissionsChart;
+                const originalDraw = chart.draw;
+                chart.draw = function() {
+                    originalDraw.apply(this, arguments);
+                    
+                    const ctx = this.ctx;
+                    const chartArea = this.chartArea;
+                    const yAxis = this.scales.y;
+                    
+                    // Draw 300 target line (2030 goal)
+                    const y300 = yAxis.getPixelForValue(300);
+                    ctx.save();
+                    ctx.strokeStyle = '#10b981';
+                    ctx.setLineDash([5, 5]);
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(chartArea.left, y300);
+                    ctx.lineTo(chartArea.right, y300);
+                    ctx.stroke();
+                    
+                    // Draw 425 current average line
+                    const y425 = yAxis.getPixelForValue(425);
+                    ctx.strokeStyle = '#3b82f6';
+                    ctx.setLineDash([3, 3]);
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.moveTo(chartArea.left, y425);
+                    ctx.lineTo(chartArea.right, y425);
+                    ctx.stroke();
+                    ctx.restore();
+                };
+            }
+            
+            // Initialize chart with default data
+            initChart('all');
+            
+            // Filter functionality
+            document.querySelectorAll('.filter-button').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Remove active class from all buttons in the same group
+                    const isTypeFilter = this.hasAttribute('data-filter');
+                    const isStatusFilter = this.hasAttribute('data-status');
+                    
+                    if (isTypeFilter) {
+                        document.querySelectorAll('[data-filter]').forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        const filterType = this.getAttribute('data-filter');
+                        initChart(filterType);
+                    }
+                    
+                    if (isStatusFilter) {
+                        document.querySelectorAll('[data-status]').forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        const statusType = this.getAttribute('data-status');
+                        initChart(statusType);
+                    }
+                    
+                    // Add visual feedback
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1.05)';
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1)';
+                        }, 150);
+                    }, 100);
+                });
             });
             
-            // Add reference lines to chart
-            const chart = emissionsChart;
-            const originalDraw = chart.draw;
-            chart.draw = function() {
-                originalDraw.apply(this, arguments);
+            // Enhanced Testimonial Carousel Functionality
+            function showSlide(slideIndex) {
+                const slides = document.querySelectorAll('.testimonial-slide');
+                const dots = document.querySelectorAll('.carousel-dot');
                 
-                const ctx = this.ctx;
-                const chartArea = this.chartArea;
-                const yAxis = this.scales.y;
+                // Remove all classes first
+                slides.forEach(slide => {
+                    slide.classList.remove('active', 'prev', 'next');
+                });
                 
-                // Draw 300 target line (2030 goal)
-                const y300 = yAxis.getPixelForValue(300);
-                ctx.save();
-                ctx.strokeStyle = '#10b981';
-                ctx.setLineDash([5, 5]);
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(chartArea.left, y300);
-                ctx.lineTo(chartArea.right, y300);
-                ctx.stroke();
+                // Set current slide as active
+                slides[slideIndex].classList.add('active');
                 
-                // Draw 425 current average line
-                const y425 = yAxis.getPixelForValue(425);
-                ctx.strokeStyle = '#3b82f6';
-                ctx.setLineDash([3, 3]);
-                ctx.lineWidth = 2;
-                ctx.beginPath();
-                ctx.moveTo(chartArea.left, y425);
-                ctx.lineTo(chartArea.right, y425);
-                ctx.stroke();
-                ctx.restore();
-            };
+                // Set previous and next slides
+                const prevIndex = (slideIndex - 1 + totalSlides) % totalSlides;
+                const nextIndex = (slideIndex + 1) % totalSlides;
+                
+                slides[prevIndex].classList.add('prev');
+                slides[nextIndex].classList.add('next');
+                
+                // Update dots
+                dots.forEach((dot, index) => {
+                    if (index === slideIndex) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            }
+            
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(currentSlide);
+            }
+            
+            // Carousel navigation
+            document.getElementById('nextBtn').addEventListener('click', nextSlide);
+            document.getElementById('prevBtn').addEventListener('click', prevSlide);
+            
+            // Carousel dots
+            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                });
+            });
+            
+            // Initialize carousel
+            showSlide(0);
             
             // Contact form submission
             document.getElementById('contactButton').addEventListener('click', () => {
@@ -1102,13 +1799,6 @@
                     emissionsChart.update();
                 }
             }
-            
-            // Listen for theme changes to update chart
-            const originalToggleTheme = toggleTheme;
-            toggleTheme = function() {
-                originalToggleTheme();
-                setTimeout(updateChartTheme, 100);
-            };
         });
     </script>
 </body>
