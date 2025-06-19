@@ -35,10 +35,6 @@ Welcome to **EcoTech Solutions**, a responsive and innovative platform built for
 - 🌗 **Custom Theme Toggle** – Light/Dark mode with animated emoji switch
 - 🌀 **CSS Animations & Transitions** – Smooth effects and enhanced UX
 - 🚀 **CDN Assets** – Fast-loading with zero external build tools
-- 🧪 **AI Tooling**:
-  - [v0.dev](https://v0.dev) for layout structuring
-  - [ChatGPT](https://chat.openai.com) for scripting and interactivity
-  - [blackbox.ai](https://www.blackbox.ai) for code completion and snippets
 ---
 
 ## 💡 Features Implemented
