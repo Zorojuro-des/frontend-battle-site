@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoTech Solutions - Sustainable Technology Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        /* Custom animations and effects */
+        @keyframes ripple {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes progressBar {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* Light Mode Styles */
+        .light-mode {
+            background-color: #f9fafb;
+            color: #111827;
+        }
+        
+        .light-mode .navbar {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .light-mode .section-light {
+            background-color: #ffffff;
+            color: #111827;
+        }
+        
+        .light-mode .section-gray {
+            background-color: #f3f4f6;
+            color: #111827;
+        }
+        
+        .light-mode .card-light {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
+            color: #111827;
+        }
+        
+        .light-mode .text-primary {
+            color: #1f2937;
+        }
+        
+        .light-mode .text-secondary {
+            color: #6b7280;
+        }
+        
+        .light-mode .border-light {
+            border-color: #e5e7eb;
+        }
+        
+        /* Dark Mode Styles */
+        .dark-mode {
+            background-color: #111827;
+            color: #f9fafb;
+        }
+        
+        .dark-mode .navbar {
+            background-color: rgba(17, 24, 39, 0.9);
+            border-bottom: 1px solid #374151;
+        }
+        
+        .dark-mode .section-light {
+            background-color: #1f2937;
+            color: #f9fafb;
+        }
+        
+        .dark-mode .section-gray {
+            background-color: #111827;
+            color: #f9fafb;
+        }
+        
+        .dark-mode .card-light {
+            background-color: #1f2937;
+            border: 1px solid #374151;
+            color: #f9fafb;
+        }
+        
+        .dark-mode .text-primary {
+            color: #f9fafb;
+        }
+        
+        .dark-mode .text-secondary {
+            color: #d1d5db;
+        }
+        
+        .dark-mode .border-light {
+            border-color: #374151;
+        }
+        
+        /* Enhanced Theme Toggle */
+        .theme-toggle {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background: linear-gradient(45deg, #fbbf24, #f59e0b);
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark-mode .theme-toggle {
+            background: linear-gradient(45deg, #1e40af, #3b82f6);
+        }
+        
+        .theme-toggle::before {
+            content: '☀️';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 26px;
+            height: 26px;
+            background: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dark-mode .theme-toggle::before {
+            content: '🌙';
+            transform: translateX(30px);
+        }
+        
+        /* Ripple effect */
+        .ripple-effect {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ripple-effect span.ripple {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.4);
+            transform: scale(0);
+            animation: ripple 600ms linear;
+            pointer-events: none;
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .card-hover-effect:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        
+        .dark-mode .card-hover-effect:hover {
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Progress bar for loader */
+        .progress-bar {
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #10b981, #3b82f6, #8b5cf6);
+            animation: progressBar 2s ease-out forwards;
+        }
+        
+        /* Brand kit card styles */
+        .brand-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .dark-mode .brand-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Portfolio visibility fix */
+        .portfolio-item {
+            min-height: 300px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Stats progress bars */
+        .stat-progress {
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .dark-mode .stat-progress {
+            background: #374151;
+        }
+        
+        .stat-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981, #3b82f6);
+            border-radius: 4px;
+            transition: width 2s ease-out;
+        }
+        
+        /* Navigation improvements */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(90deg, #10b981, #3b82f6);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Footer styles */
+        .footer-gradient {
+            background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+        }
+        
+        .light-mode .footer-gradient {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        }
+        
+        /* Floating animation */
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Input styles */
+        .form-input {
+            background-color: #ffffff;
+            border: 1px solid #d1d5db;
+            color: #111827;
+        }
+        
+        .dark-mode .form-input {
+            background-color: #374151;
+            border: 1px solid #4b5563;
+            color: #f9fafb;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #3b82f6;
+            border-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="font-sans transition-all duration-300">
+    <!-- Loader Section with Progress Bar -->
+    <div id="loaderSection" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-gradient-to-br from-green-900 via-blue-900 to-purple-900">
+        <div class="text-center">
+            <center><div class="w-32 h-32 border-4 border-green-400 border-t-transparent rounded-full animate-spin mb-8"></div></center>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 text-white">EcoTech</h1>
+            <p class="text-xl text-green-200 mb-8">Sustainable Technology Solutions</p>
+            <div class="w-80 bg-gray-700 rounded-full overflow-hidden">
+                <div class="progress-bar rounded-full"></div>
+            </div>
+            <p class="text-white mt-4 text-lg">Initializing green technology...</p>
+        </div>
+    </div>
+    
+    <!-- Navbar -->
+    <nav class="navbar fixed top-0 left-0 right-0 z-40 shadow-lg backdrop-blur-md transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">ET</span>
+                        </div>
+                        <span class="text-xl font-bold text-primary">EcoTech Solutions</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#hero" class="nav-link text-secondary hover:text-primary px-1">Home</a>
+                    <a href="#sustainability" class="nav-link text-secondary hover:text-primary px-1">Sustainability</a>
+                    <a href="#impact" class="nav-link text-secondary hover:text-primary px-1">Impact</a>
+                    <a href="#solutions" class="nav-link text-secondary hover:text-primary px-1">Solutions</a>
+                    <a href="#projects" class="nav-link text-secondary hover:text-primary px-1">Projects</a>
+                    <a href="#contact" class="nav-link text-secondary hover:text-primary px-1">Contact</a>
+                    <div id="themeToggle" class="theme-toggle"></div>
+                </div>
+                <div class="md:hidden flex items-center space-x-2">
+                    <div id="mobileThemeToggle" class="theme-toggle scale-75"></div>
+                    <button id="mobileMenuButton" class="p-2 rounded-md focus:outline-none">
+                        <svg class="w-6 h-6 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="hidden md:hidden section-light shadow-lg transition-all duration-300">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#hero" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:text-primary hover:bg-gray-100 dark-mode:hover:bg-gray-700">Home</a>
+                <a href="#sustainability" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:text-primary hover:bg-gray-100 dark-mode:hover:bg-gray-700">Sustainability</a>
+                <a href="#impact" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:text-primary hover:bg-gray-100 dark-mode:hover:bg-gray-700">Impact</a>
+                <a href="#solutions" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:text-primary hover:bg-gray-100 dark-mode:hover:bg-gray-700">Solutions</a>
+                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:text-primary hover:bg-gray-100 dark-mode:hover:bg-gray-700">Projects</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-secondary hover:text-primary hover:bg-gray-100 dark-mode:hover:bg-gray-700">Contact</a>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Smooth Scroll Container -->
+    <div class="snap-y snap-mandatory h-screen overflow-y-auto scroll-smooth pt-16">
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-screen bg-gradient-to-br from-green-900 via-blue-900 to-purple-900 text-white flex items-center justify-center snap-start relative overflow-hidden">
+            <div class="absolute inset-0 bg-black opacity-20"></div>
+            <div class="absolute inset-0">
+                <div class="float-animation absolute top-20 left-10 w-4 h-4 bg-green-400 rounded-full opacity-60"></div>
+                <div class="float-animation absolute top-40 right-20 w-6 h-6 bg-blue-400 rounded-full opacity-40" style="animation-delay: 1s;"></div>
+                <div class="float-animation absolute bottom-40 left-20 w-5 h-5 bg-purple-400 rounded-full opacity-50" style="animation-delay: 2s;"></div>
+            </div>
+            <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 fade-in-up" style="animation-delay: 0.2s;">
+                    Sustainable Technology
+                    <span class="block text-green-400">for a Better Future</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-gray-200 fade-in-up" style="animation-delay: 0.4s;">
+                    Leading the transition to carbon-neutral technology solutions with innovative green infrastructure and sustainable business practices
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in-up" style="animation-delay: 0.6s;">
+                    <button id="heroButton" class="ripple-effect bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                        Explore Our Impact
+                    </button>
+                    <button class="ripple-effect border-2 border-white text-white hover:bg-white hover:text-green-900 font-bold py-4 px-8 rounded-full text-lg transition-all duration-300">
+                        View Solutions
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                </svg>
+            </div>
+        </section>
+        
+        <!-- Sustainability Partners Section -->
+        <section id="sustainability" class="min-h-screen py-20 px-4 section-gray snap-start">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Sustainability Partners</h2>
+                <p class="text-center text-secondary mb-16 text-lg">Collaborating with leading organizations to drive environmental innovation</p>
+                <div class="space-y-4">
+                    <div class="brand-card p-6 rounded-xl flex items-center justify-between hover:bg-opacity-20 transition-all duration-300">
+                        <div class="flex items-center space-x-4">
+                            <!-- <input type="checkbox" class="w-5 h-5 rounded border-gray-300"> -->
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">EC</span>
+                                </div>
+                                <div>
+                                    <span class="text-primary text-xl font-medium">EcoCorp</span>
+                                    <p class="text-secondary text-sm">Renewable Energy Solutions</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-green-500 text-sm font-medium">Active Partner</div>
+                    </div>
+                    
+                    <div class="brand-card p-6 rounded-xl flex items-center justify-between hover:bg-opacity-20 transition-all duration-300">
+                        <div class="flex items-center space-x-4">
+                            <!-- <input type="checkbox" class="w-5 h-5 rounded border-gray-300"> -->
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">IC</span>
+                                </div>
+                                <div>
+                                    <span class="text-primary text-xl font-medium">InnovaCorp</span>
+                                    <p class="text-secondary text-sm">Smart Grid Technology</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-blue-500 text-sm font-medium">Strategic Alliance</div>
+                    </div>
+                    
+                    <div class="brand-card p-6 rounded-xl flex items-center justify-between hover:bg-opacity-20 transition-all duration-300">
+                        <div class="flex items-center space-x-4">
+                            <!-- <input type="checkbox" class="w-5 h-5 rounded border-gray-300"> -->
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-xs font-bold">GA</span>
+                                </div>
+                                <div>
+                                    <span class="text-primary text-xl font-medium">Green Alliance</span>
+                                    <p class="text-secondary text-sm">Carbon Offset Programs</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-purple-500 text-sm font-medium">Lead Partner</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Environmental Impact Stats -->
+        <section id="impact" class="min-h-screen py-20 px-4 section-light snap-start">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Environmental Impact Metrics</h2>
+                <p class="text-center text-secondary mb-16 text-lg">Tracking our progress towards carbon neutrality and sustainable operations</p>
+                
+                <!-- Main Impact Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <div class="card-light p-8 rounded-xl shadow-xl border-light">
+                        <h3 class="text-lg font-medium text-secondary mb-2">Carbon Footprint Reduction</h3>
+                        <div class="text-4xl font-bold text-primary mb-2">45,048</div>
+                        <div class="text-sm text-secondary mb-4">tCO₂e saved annually</div>
+                        <div class="flex items-center text-green-600">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                            <span class="text-sm">32% improvement since 2019</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-light p-8 rounded-xl shadow-xl border-light">
+                        <h3 class="text-lg font-medium text-secondary mb-2">Energy Efficiency</h3>
+                        <div class="text-4xl font-bold text-primary mb-2">123</div>
+                        <div class="text-sm text-secondary mb-4">kWh/m² average consumption</div>
+                        <div class="flex items-center text-green-600">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                            <span class="text-sm">28% below industry average</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card-light p-8 rounded-xl shadow-xl border-light">
+                        <h3 class="text-lg font-medium text-secondary mb-2">Renewable Energy Usage</h3>
+                        <div class="text-4xl font-bold text-primary mb-2">47.8M</div>
+                        <div class="text-sm text-secondary mb-4">kWh from renewable sources</div>
+                        <div class="flex items-center text-green-600">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                            <span class="text-sm">85% of total energy consumption</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Progress Tracking -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="card-light p-6 rounded-xl border-light">
+                        <h4 class="font-medium text-primary mb-4">Carbon Reduction Progress</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-secondary">2024 Target</span>
+                                    <span class="text-primary">45,048 tCO₂e</span>
+                                </div>
+                                <div class="stat-progress">
+                                    <div class="stat-fill" style="width: 100%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-secondary">2023 Achievement</span>
+                                    <span class="text-primary">38,200 tCO₂e</span>
+                                </div>
+                                <div class="stat-progress">
+                                    <div class="stat-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-secondary">2022 Baseline</span>
+                                    <span class="text-primary">32,813 tCO₂e</span>
+                                </div>
+                                <div class="stat-progress">
+                                    <div class="stat-fill" style="width: 73%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-light p-6 rounded-xl border-light">
+                        <h4 class="font-medium text-primary mb-4">Energy Efficiency Gains</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-secondary">Current Performance</span>
+                                    <span class="text-primary">123 kWh/m²</span>
+                                </div>
+                                <div class="stat-progress">
+                                    <div class="stat-fill" style="width: 78%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-secondary">2023 Performance</span>
+                                    <span class="text-primary">135 kWh/m²</span>
+                                </div>
+                                <div class="stat-progress">
+                                    <div class="stat-fill" style="width: 86%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-secondary">Industry Average</span>
+                                    <span class="text-primary">171 kWh/m²</span>
+                                </div>
+                                <div class="stat-progress">
+                                    <div class="stat-fill" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-light p-6 rounded-xl border-light">
+                        <h4 class="font-medium text-primary mb-4">Renewable Energy Adoption</h4>
+                        <div class="space-y-3">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-secondary">2024 Usage</span>
+                                    <span class="text-primary">47.8M kWh</span>
+                                </div>
+                                <div class="stat-progress">
+                                    <div class="stat-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-secondary">2023 Usage</span>
+                                    <span class="text-primary">42.1M kWh</span>
+                                </div>
+                                <div class="stat-progress">
+                                    <div class="stat-fill" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-secondary">2022 Usage</span>
+                                    <span class="text-primary">35.6M kWh</span>
+                                </div>
+                                <div class="stat-progress">
+                                    <div class="stat-fill" style="width: 63%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Carbon Emissions Analytics -->
+        <section id="solutions" class="min-h-screen py-20 px-4 section-gray snap-start">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Carbon Emissions Analytics</h2>
+                <p class="text-center text-secondary mb-16 text-lg">Real-time monitoring and analysis of our carbon reduction initiatives across all facilities</p>
+                
+                <!-- Filter Controls -->
+                <div class="mb-8 space-y-4">
+                    <div>
+                        <h3 class="text-lg font-medium text-primary mb-3">Filter by Facility Type</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="text-sm text-secondary">Type</span>
+                            <button class="px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm hover:bg-green-200 transition-colors">Green Retrofit</button>
+                            <button class="px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm hover:bg-blue-200 transition-colors">New Sustainable Build</button>
+                            <button class="px-4 py-2 bg-purple-600 text-white rounded-full text-sm hover:bg-purple-700 transition-colors">All Facilities</button>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="text-sm text-secondary">Status</span>
+                            <button class="px-4 py-2 bg-green-600 text-white rounded-full text-sm hover:bg-green-700 transition-colors" data-status="Operational">Operational</button>
+                            <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm hover:bg-gray-300 transition-colors" data-status="Under Construction">Under Construction</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Chart Container -->
+                <div class="card-light p-6 rounded-xl border-light">
+                    <canvas id="emissionsChart" width="400" height="200"></canvas>
+                </div>
+                
+                <!-- Chart Legend -->
+                <div class="mt-6 flex flex-wrap gap-6 justify-center">
+                    <div class="flex items-center">
+                        <div class="w-4 h-0.5 bg-green-500 mr-2"></div>
+                        <span class="text-sm text-secondary">Target: 300 kgCO₂e/m² by 2030</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-4 h-0.5 bg-blue-500 mr-2"></div>
+                        <span class="text-sm text-secondary">Current Average: 425 kgCO₂e/m²</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sustainable Projects Portfolio -->
+        <section id="projects" class="min-h-screen py-20 px-4 section-light snap-start">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Sustainable Technology Projects</h2>
+                <p class="text-center text-secondary mb-16 text-lg">Innovative solutions driving environmental sustainability across industries</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-green-500 to-emerald-400 card-hover-effect">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        <div class="relative z-10 p-6 h-full flex flex-col justify-end">
+                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                <h3 class="text-white text-xl font-bold mb-2">Smart Grid Platform</h3>
+                                <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">AI-powered energy distribution system reducing waste by 35% across 50+ facilities</p>
+                                <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded-full mr-2">Energy Efficiency</span>
+                                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded-full">IoT Integration</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">⚡</div>
+                    </div>
+                    
+                    <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-blue-500 to-cyan-400 card-hover-effect">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        <div class="relative z-10 p-6 h-full flex flex-col justify-end">
+                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                <h3 class="text-white text-xl font-bold mb-2">Carbon Tracking System</h3>
+                                <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">Real-time carbon footprint monitoring with automated reporting and offset recommendations</p>
+                                <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded-full mr-2">Carbon Analytics</span>
+                                    <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded-full">Sustainability</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">🌱</div>
+                    </div>
+                    
+                    <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-purple-500 to-pink-400 card-hover-effect">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        <div class="relative z-10 p-6 h-full flex flex-col justify-end">
+                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                <h3 class="text-white text-xl font-bold mb-2">Renewable Energy Hub</h3>
+                                <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">Integrated solar, wind, and battery storage system powering 10,000+ homes sustainably</p>
+                                <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <span class="inline-block bg-purple-600 text-white text-xs px-2 py-1 rounded-full mr-2">Renewable Energy</span>
+                                    <span class="inline-block bg-yellow-600 text-white text-xs px-2 py-1 rounded-full">Solar Power</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">☀️</div>
+                    </div>
+                    
+                    <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-teal-500 to-green-400 card-hover-effect">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        <div class="relative z-10 p-6 h-full flex flex-col justify-end">
+                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                <h3 class="text-white text-xl font-bold mb-2">Waste-to-Energy Plant</h3>
+                                <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">Converting 500 tons of waste daily into clean energy while reducing landfill impact</p>
+                                <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <span class="inline-block bg-teal-600 text-white text-xs px-2 py-1 rounded-full mr-2">Waste Management</span>
+                                    <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded-full">Clean Energy</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">♻️</div>
+                    </div>
+                    
+                    <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-orange-500 to-red-400 card-hover-effect">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        <div class="relative z-10 p-6 h-full flex flex-col justify-end">
+                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                <h3 class="text-white text-xl font-bold mb-2">Green Building Network</h3>
+                                <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">LEED Platinum certified buildings with 60% lower energy consumption than traditional structures</p>
+                                <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <span class="inline-block bg-orange-600 text-white text-xs px-2 py-1 rounded-full mr-2">Green Building</span>
+                                    <span class="inline-block bg-red-600 text-white text-xs px-2 py-1 rounded-full">LEED Certified</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">🏢</div>
+                    </div>
+                    
+                    <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-indigo-500 to-purple-400 card-hover-effect">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                        <div class="relative z-10 p-6 h-full flex flex-col justify-end">
+                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                <h3 class="text-white text-xl font-bold mb-2">AI Climate Predictor</h3>
+                                <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">Machine learning platform predicting climate impacts and optimizing sustainability strategies</p>
+                                <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    <span class="inline-block bg-indigo-600 text-white text-xs px-2 py-1 rounded-full mr-2">AI/ML</span>
+                                    <span class="inline-block bg-purple-600 text-white text-xs px-2 py-1 rounded-full">Climate Tech</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">🤖</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="min-h-screen flex items-center justify-center section-gray snap-start">
+            <div class="max-w-md w-full card-light p-10 rounded-xl shadow-lg mx-4 border-light">
+                <h2 class="text-3xl font-bold text-center mb-4 text-primary">Partner With Us</h2>
+                <p class="text-center text-secondary mb-8">Join our mission to create sustainable technology solutions for a greener future</p>
+                <form id="contactForm" class="space-y-6">
+                    <div>
+                        <label for="name" class="block text-secondary mb-2 font-medium">Full Name</label>
+                        <input type="text" id="name" class="form-input w-full px-4 py-3 rounded-lg transition-all duration-300">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-secondary mb-2 font-medium">Email Address</label>
+                        <input type="email" id="email" class="form-input w-full px-4 py-3 rounded-lg transition-all duration-300">
+                    </div>
+                    <div>
+                        <label for="company" class="block text-secondary mb-2 font-medium">Company/Organization</label>
+                        <input type="text" id="company" class="form-input w-full px-4 py-3 rounded-lg transition-all duration-300">
+                    </div>
+                    <div>
+                        <label for="message" class="block text-secondary mb-2 font-medium">How can we collaborate?</label>
+                        <textarea id="message" rows="4" class="form-input w-full px-4 py-3 rounded-lg transition-all duration-300" placeholder="Tell us about your sustainability goals..."></textarea>
+                    </div>
+                    <button id="contactButton" type="button" class="ripple-effect w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+                        Start Collaboration
+                    </button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-gradient py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Company Info -->
+                <div class="md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold">ET</span>
+                        </div>
+                        <span class="text-2xl font-bold text-primary">EcoTech Solutions</span>
+                    </div>
+                    <p class="text-secondary mb-6 max-w-md">Leading the transition to sustainable technology with innovative solutions that reduce carbon footprint while driving business growth.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-500 hover:bg-blue-600 rounded-full flex items-center justify-center text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-purple-500 hover:bg-purple-600 rounded-full flex items-center justify-center text-white transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z"/></svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold text-primary mb-4">Solutions</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Smart Grid Technology</a></li>
+                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Carbon Analytics</a></li>
+                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Renewable Energy</a></li>
+                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Green Building</a></li>
+                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Waste Management</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Resources -->
+                <div>
+                    <h3 class="text-lg font-semibold text-primary mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Sustainability Report</a></li>
+                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Case Studies</a></li>
+                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">White Papers</a></li>
+                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">API Documentation</a></li>
+                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Support Center</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Newsletter Signup -->
+            <div class="border-t border-light pt-8 mb-8">
+                <div class="max-w-md mx-auto text-center">
+                    <h3 class="text-lg font-semibold text-primary mb-2">Stay Updated</h3>
+                    <p class="text-secondary mb-4">Get the latest sustainability insights and technology updates</p>
+                    <div class="flex gap-2">
+                        <input type="email" placeholder="Enter your email" class="form-input flex-1 px-4 py-2 rounded-lg">
+                        <button class="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Bottom Footer -->
+            <div class="border-t border-light pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-secondary text-sm mb-4 md:mb-0">
+                    © 2024 EcoTech Solutions. All rights reserved. | Building a sustainable future through technology.
+                </div>
+                <div class="flex space-x-6 text-sm">
+                    <a href="#" class="text-secondary hover:text-green-500 transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-secondary hover:text-green-500 transition-colors">Terms of Service</a>
+                    <a href="#" class="text-secondary hover:text-green-500 transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Wait for DOM to load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize theme
+            const body = document.body;
+            const savedTheme = localStorage.getItem('theme') || 
+                             (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+            
+            // Apply initial theme
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
+            } else {
+                body.classList.add('light-mode');
+                body.classList.remove('dark-mode');
+            }
+            
+            // Hide loader after 2.5 seconds
+            setTimeout(function() {
+                document.getElementById('loaderSection').style.display = 'none';
+                document.querySelector('html').style.scrollBehavior = 'smooth';
+            }, 2500);
+            
+            // Theme toggle functionality - COMPLETELY FIXED
+            const themeToggle = document.getElementById('themeToggle');
+            const mobileThemeToggle = document.getElementById('mobileThemeToggle');
+            
+            function toggleTheme() {
+                const isDark = body.classList.contains('dark-mode');
+                
+                if (isDark) {
+                    body.classList.remove('dark-mode');
+                    body.classList.add('light-mode');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    body.classList.remove('light-mode');
+                    body.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                }
+            }
+            
+            themeToggle.addEventListener('click', toggleTheme);
+            mobileThemeToggle.addEventListener('click', toggleTheme);
+            
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobileMenuButton');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('#mobileMenu a').forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+            
+            // Ripple effect implementation
+            document.querySelectorAll('.ripple-effect').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.className = 'ripple';
+                    ripple.style.left = `${x}px`;
+                    ripple.style.top = `${y}px`;
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+            
+            // Hero button scroll
+            document.getElementById('heroButton').addEventListener('click', function() {
+                document.getElementById('sustainability').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        targetElement.scrollIntoView({ 
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Initialize Chart.js for emissions chart
+            const ctx = document.getElementById('emissionsChart').getContext('2d');
+            const emissionsChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Solar Farm A', 'Wind Farm B', 'Hydro Plant C', 'Geothermal D', 'Biomass E', 'Smart Grid F', 'Battery Hub G', 'Green Building H', 'Waste Plant I', 'Carbon Capture J', 'EV Station K', 'Heat Pump L', 'LED Retrofit M', 'Smart Meter N', 'Insulation O', 'HVAC Upgrade P', 'Water Recycle Q', 'Compost R', 'Solar Roof S', 'Wind Turbine T'],
+                    datasets: [{
+                        label: 'Carbon Intensity (kgCO₂e/m²)',
+                        data: [125, 89, 234, 156, 178, 45, 67, 123, 89, 298, 234, 145, 78, 56, 34, 123, 89, 67, 156, 134],
+                        backgroundColor: function(context) {
+                            const value = context.parsed.y;
+                            if (value < 100) return '#10b981'; // Green for excellent
+                            if (value < 200) return '#3b82f6'; // Blue for good
+                            if (value < 300) return '#f59e0b'; // Yellow for moderate
+                            return '#ef4444'; // Red for needs improvement
+                        },
+                        borderWidth: 0,
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: 'white',
+                            bodyColor: 'white',
+                            borderColor: '#10b981',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 350,
+                            grid: {
+                                color: function(context) {
+                                    return body.classList.contains('dark-mode') ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+                                }
+                            },
+                            ticks: {
+                                color: function() {
+                                    return body.classList.contains('dark-mode') ? '#d1d5db' : '#6b7280';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                color: function() {
+                                    return body.classList.contains('dark-mode') ? '#d1d5db' : '#6b7280';
+                                },
+                                maxRotation: 45
+                            }
+                        }
+                    },
+                    elements: {
+                        bar: {
+                            borderRadius: 4
+                        }
+                    }
+                }
+            });
+            
+            // Add reference lines to chart
+            const chart = emissionsChart;
+            const originalDraw = chart.draw;
+            chart.draw = function() {
+                originalDraw.apply(this, arguments);
+                
+                const ctx = this.ctx;
+                const chartArea = this.chartArea;
+                const yAxis = this.scales.y;
+                
+                // Draw 300 target line (2030 goal)
+                const y300 = yAxis.getPixelForValue(300);
+                ctx.save();
+                ctx.strokeStyle = '#10b981';
+                ctx.setLineDash([5, 5]);
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(chartArea.left, y300);
+                ctx.lineTo(chartArea.right, y300);
+                ctx.stroke();
+                
+                // Draw 425 current average line
+                const y425 = yAxis.getPixelForValue(425);
+                ctx.strokeStyle = '#3b82f6';
+                ctx.setLineDash([3, 3]);
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(chartArea.left, y425);
+                ctx.lineTo(chartArea.right, y425);
+                ctx.stroke();
+                ctx.restore();
+            };
+            
+            // Contact form submission
+            document.getElementById('contactButton').addEventListener('click', () => {
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const company = document.getElementById('company').value;
+                const message = document.getElementById('message').value;
+                
+                if (name && email && message) {
+                    alert(`Thank you ${name}! We're excited to explore sustainable technology partnerships with you. Our team will reach out within 24 hours to discuss how we can collaborate on your green initiatives.`);
+                    document.getElementById('contactForm').reset();
+                } else {
+                    alert('Please fill in all required fields to start our collaboration.');
+                }
+            });
+            
+            // Animate progress bars when they come into view
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const progressBars = entry.target.querySelectorAll('.stat-fill');
+                        progressBars.forEach(bar => {
+                            const width = bar.style.width;
+                            bar.style.width = '0%';
+                            setTimeout(() => {
+                                bar.style.width = width;
+                            }, 100);
+                        });
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe impact section
+            const impactSection = document.getElementById('impact');
+            if (impactSection) {
+                observer.observe(impactSection);
+            }
+            
+            // Newsletter signup
+            document.querySelector('footer button').addEventListener('click', function() {
+                const emailInput = this.previousElementSibling;
+                const email = emailInput.value;
+                
+                if (email && email.includes('@')) {
+                    alert('Thank you for subscribing to EcoTech Solutions updates! You\'ll receive the latest sustainability insights and green technology news.');
+                    emailInput.value = '';
+                } else {
+                    alert('Please enter a valid email address to stay updated on our sustainability initiatives.');
+                }
+            });
+            
+            // Update chart colors when theme changes
+            function updateChartTheme() {
+                if (emissionsChart) {
+                    emissionsChart.options.scales.y.grid.color = body.classList.contains('dark-mode') ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)';
+                    emissionsChart.options.scales.y.ticks.color = body.classList.contains('dark-mode') ? '#d1d5db' : '#6b7280';
+                    emissionsChart.options.scales.x.ticks.color = body.classList.contains('dark-mode') ? '#d1d5db' : '#6b7280';
+                    emissionsChart.update();
+                }
+            }
+            
+            // Listen for theme changes to update chart
+            const originalToggleTheme = toggleTheme;
+            toggleTheme = function() {
+                originalToggleTheme();
+                setTimeout(updateChartTheme, 100);
+            };
+        });
+    </script>
+</body>
+</html>
