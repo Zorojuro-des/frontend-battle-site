@@ -50,18 +50,3 @@ This website was built with the assistance of modern AI-powered tools:
 ├── index.html      # Main website file
 ├── README.md       # Project documentation
 ```
-
----
-
-## ✍️ Credits
-
-Created with the support of:
-- The [OpenAI](https://openai.com) ecosystem
-- Developers and designers committed to climate impact
-
----
-
-## 📬 Contact
-
-Want to collaborate or learn more?  
-Visit the **Contact** section of the site or email: `contact@ecotechsolutions.com`
