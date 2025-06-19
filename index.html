@@ -508,20 +508,20 @@
             opacity: 0.3;
         }
         
-        /* Section boundary fix */
-        .section-boundary {
-            position: relative;
-            z-index: 1;
+        /* Main container fix for single scrollbar */
+        .main-container {
+            height: 100vh;
+            overflow-y: auto;
+            scroll-behavior: smooth;
         }
         
-        .section-boundary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: transparent;
+        
+        /* Ensure sections take proper height */
+        .section-full {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
     </style>
 </head>
@@ -588,814 +588,819 @@
         </div>
     </nav>
     
-    <!-- Smooth Scroll Container -->
-    <div class="snap-y snap-mandatory h-screen overflow-y-auto scroll-smooth pt-16">
-        <!-- Hero Section -->
-        <section id="hero" class="min-h-screen bg-gradient-to-br from-green-900 via-blue-900 to-purple-900 text-white flex items-center justify-center snap-start relative overflow-hidden">
-            <div class="absolute inset-0 bg-black opacity-20"></div>
-            <div class="absolute inset-0">
-                <div class="float-animation absolute top-20 left-10 w-4 h-4 bg-green-400 rounded-full opacity-60"></div>
-                <div class="float-animation absolute top-40 right-20 w-6 h-6 bg-blue-400 rounded-full opacity-40" style="animation-delay: 1s;"></div>
-                <div class="float-animation absolute bottom-40 left-20 w-5 h-5 bg-purple-400 rounded-full opacity-50" style="animation-delay: 2s;"></div>
-            </div>
-            <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
-                <h1 class="text-5xl md:text-7xl font-bold mb-6 fade-in-up" style="animation-delay: 0.2s;">
-                    Sustainable Technology
-                    <span class="block text-green-400">for a Better Future</span>
-                </h1>
-                <p class="text-xl md:text-2xl mb-8 text-gray-200 fade-in-up" style="animation-delay: 0.4s;">
-                    Leading the transition to carbon-neutral technology solutions with innovative green infrastructure and sustainable business practices
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in-up" style="animation-delay: 0.6s;">
-                    <button id="heroButton" class="ripple-effect bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300">
-                        Explore Our Impact
-                    </button>
-                    <button id="viewSolutionsButton" class="ripple-effect border-2 border-white text-white hover:bg-white hover:text-green-900 font-bold py-4 px-8 rounded-full text-lg transition-all duration-300">
-                        View Solutions
-                    </button>
+    <!-- Main Container with Single Scrollbar -->
+    <div class="main-container pt-16">
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Hero Section -->
+            <section id="hero" class="section-full bg-gradient-to-br from-green-900 via-blue-900 to-purple-900 text-white relative overflow-hidden">
+                <div class="absolute inset-0 bg-black opacity-20"></div>
+                <div class="absolute inset-0">
+                    <div class="float-animation absolute top-20 left-10 w-4 h-4 bg-green-400 rounded-full opacity-60"></div>
+                    <div class="float-animation absolute top-40 right-20 w-6 h-6 bg-blue-400 rounded-full opacity-40" style="animation-delay: 1s;"></div>
+                    <div class="float-animation absolute bottom-40 left-20 w-5 h-5 bg-purple-400 rounded-full opacity-50" style="animation-delay: 2s;"></div>
                 </div>
-            </div>
-            
-            <!-- Scroll indicator -->
-            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                </svg>
-            </div>
-        </section>
-        
-        <!-- Sustainability Partners Section -->
-        <section id="sustainability" class="min-h-screen py-20 px-4 section-gray snap-start">
-            <div class="max-w-4xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Sustainability Partners</h2>
-                <p class="text-center text-secondary mb-16 text-lg">Collaborating with leading organizations to drive environmental innovation</p>
-                <div class="space-y-4">
-                    <div class="brand-card p-6 rounded-xl flex items-center justify-between hover:bg-opacity-20 transition-all duration-300">
-                        <div class="flex items-center space-x-4">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                                    <span class="text-white text-xs font-bold">EC</span>
-                                </div>
-                                <div>
-                                    <span class="text-primary text-xl font-medium">EcoCorp</span>
-                                    <p class="text-secondary text-sm">Renewable Energy Solutions</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-green-500 text-sm font-medium">Active Partner</div>
-                    </div>
-                    
-                    <div class="brand-card p-6 rounded-xl flex items-center justify-between hover:bg-opacity-20 transition-all duration-300">
-                        <div class="flex items-center space-x-4">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
-                                    <span class="text-white text-xs font-bold">IC</span>
-                                </div>
-                                <div>
-                                    <span class="text-primary text-xl font-medium">InnovaCorp</span>
-                                    <p class="text-secondary text-sm">Smart Grid Technology</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-blue-500 text-sm font-medium">Strategic Alliance</div>
-                    </div>
-                    
-                    <div class="brand-card p-6 rounded-xl flex items-center justify-between hover:bg-opacity-20 transition-all duration-300">
-                        <div class="flex items-center space-x-4">
-                            <div class="flex items-center space-x-3">
-                                <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
-                                    <span class="text-white text-xs font-bold">GA</span>
-                                </div>
-                                <div>
-                                    <span class="text-primary text-xl font-medium">Green Alliance</span>
-                                    <p class="text-secondary text-sm">Carbon Offset Programs</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="text-purple-500 text-sm font-medium">Lead Partner</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Environmental Impact Stats -->
-        <section id="impact" class="min-h-screen py-20 px-4 section-light snap-start">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Environmental Impact Metrics</h2>
-                <p class="text-center text-secondary mb-16 text-lg">Tracking our progress towards carbon neutrality and sustainable operations</p>
-                
-                <!-- Main Impact Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-                    <div class="card-light p-8 rounded-xl shadow-xl border-light">
-                        <h3 class="text-lg font-medium text-secondary mb-2">Carbon Footprint Reduction</h3>
-                        <div class="text-4xl font-bold text-primary mb-2">45,048</div>
-                        <div class="text-sm text-secondary mb-4">tCO₂e saved annually</div>
-                        <div class="flex items-center text-green-600">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                            </svg>
-                            <span class="text-sm">32% improvement since 2019</span>
-                        </div>
-                    </div>
-                    
-                    <div class="card-light p-8 rounded-xl shadow-xl border-light">
-                        <h3 class="text-lg font-medium text-secondary mb-2">Energy Efficiency</h3>
-                        <div class="text-4xl font-bold text-primary mb-2">123</div>
-                        <div class="text-sm text-secondary mb-4">kWh/m² average consumption</div>
-                        <div class="flex items-center text-green-600">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                            </svg>
-                            <span class="text-sm">28% below industry average</span>
-                        </div>
-                    </div>
-                    
-                    <div class="card-light p-8 rounded-xl shadow-xl border-light">
-                        <h3 class="text-lg font-medium text-secondary mb-2">Renewable Energy Usage</h3>
-                        <div class="text-4xl font-bold text-primary mb-2">47.8M</div>
-                        <div class="text-sm text-secondary mb-4">kWh from renewable sources</div>
-                        <div class="flex items-center text-green-600">
-                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
-                            </svg>
-                            <span class="text-sm">85% of total energy consumption</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Progress Tracking -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="card-light p-6 rounded-xl border-light">
-                        <h4 class="font-medium text-primary mb-4">Carbon Reduction Progress</h4>
-                        <div class="space-y-3">
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-secondary">2024 Target</span>
-                                    <span class="text-primary">45,048 tCO₂e</span>
-                                </div>
-                                <div class="stat-progress">
-                                    <div class="stat-fill" style="width: 100%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-secondary">2023 Achievement</span>
-                                    <span class="text-primary">38,200 tCO₂e</span>
-                                </div>
-                                <div class="stat-progress">
-                                    <div class="stat-fill" style="width: 85%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-secondary">2022 Baseline</span>
-                                    <span class="text-primary">32,813 tCO₂e</span>
-                                </div>
-                                <div class="stat-progress">
-                                    <div class="stat-fill" style="width: 73%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card-light p-6 rounded-xl border-light">
-                        <h4 class="font-medium text-primary mb-4">Energy Efficiency Gains</h4>
-                        <div class="space-y-3">
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-secondary">Current Performance</span>
-                                    <span class="text-primary">123 kWh/m²</span>
-                                </div>
-                                <div class="stat-progress">
-                                    <div class="stat-fill" style="width: 78%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-secondary">2023 Performance</span>
-                                    <span class="text-primary">135 kWh/m²</span>
-                                </div>
-                                <div class="stat-progress">
-                                    <div class="stat-fill" style="width: 86%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-secondary">Industry Average</span>
-                                    <span class="text-primary">171 kWh/m²</span>
-                                </div>
-                                <div class="stat-progress">
-                                    <div class="stat-fill" style="width: 100%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="card-light p-6 rounded-xl border-light">
-                        <h4 class="font-medium text-primary mb-4">Renewable Energy Adoption</h4>
-                        <div class="space-y-3">
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-secondary">2024 Usage</span>
-                                    <span class="text-primary">47.8M kWh</span>
-                                </div>
-                                <div class="stat-progress">
-                                    <div class="stat-fill" style="width: 85%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-secondary">2023 Usage</span>
-                                    <span class="text-primary">42.1M kWh</span>
-                                </div>
-                                <div class="stat-progress">
-                                    <div class="stat-fill" style="width: 75%"></div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="flex justify-between text-sm mb-1">
-                                    <span class="text-secondary">2022 Usage</span>
-                                    <span class="text-primary">35.6M kWh</span>
-                                </div>
-                                <div class="stat-progress">
-                                    <div class="stat-fill" style="width: 63%"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Carbon Emissions Analytics -->
-        <section id="solutions" class="min-h-screen py-20 px-4 section-gray snap-start">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Carbon Emissions Analytics</h2>
-                <p class="text-center text-secondary mb-16 text-lg">Real-time monitoring and analysis of our carbon reduction initiatives across all facilities</p>
-                
-                <!-- Filter Controls -->
-                <div class="mb-8 space-y-4">
-                    <div>
-                        <h3 class="text-lg font-medium text-primary mb-3">Filter by Facility Type</h3>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="text-sm text-secondary">Type</span>
-                            <button class="filter-button px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm hover:bg-green-200 transition-colors" data-filter="green-retrofit">Green Retrofit</button>
-                            <button class="filter-button px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm hover:bg-blue-200 transition-colors" data-filter="new-build">New Sustainable Build</button>
-                            <button class="filter-button px-4 py-2 bg-purple-600 text-white rounded-full text-sm hover:bg-purple-700 transition-colors active" data-filter="all">All Facilities</button>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="text-sm text-secondary">Status</span>
-                            <button class="filter-button px-4 py-2 bg-green-600 text-white rounded-full text-sm hover:bg-green-700 transition-colors active" data-status="operational">Operational</button>
-                            <button class="filter-button px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm hover:bg-gray-300 transition-colors" data-status="construction">Under Construction</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Chart Container -->
-                <div class="card-light p-6 rounded-xl border-light">
-                    <canvas id="emissionsChart" width="400" height="200"></canvas>
-                </div>
-                
-                <!-- Chart Legend -->
-                <div class="mt-6 flex flex-wrap gap-6 justify-center">
-                    <div class="flex items-center">
-                        <div class="w-4 h-0.5 bg-green-500 mr-2"></div>
-                        <span class="text-sm text-secondary">Target: 300 kgCO₂e/m² by 2030</span>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="w-4 h-0.5 bg-blue-500 mr-2"></div>
-                        <span class="text-sm text-secondary">Current Average: 425 kgCO₂e/m²</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Sustainable Projects Portfolio -->
-        <section id="projects" class="min-h-screen py-20 px-4 section-light snap-start">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Sustainable Technology Projects</h2>
-                <p class="text-center text-secondary mb-16 text-lg">Innovative solutions driving environmental sustainability across industries</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-green-500 to-emerald-400 card-hover-effect">
-                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
-                        <div class="relative z-10 p-6 h-full flex flex-col justify-end">
-                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                <h3 class="text-white text-xl font-bold mb-2">Smart Grid Platform</h3>
-                                <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">AI-powered energy distribution system reducing waste by 35% across 50+ facilities</p>
-                                <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded-full mr-2">Energy Efficiency</span>
-                                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded-full">IoT Integration</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">⚡</div>
-                    </div>
-                    
-                    <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-blue-500 to-cyan-400 card-hover-effect">
-                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
-                        <div class="relative z-10 p-6 h-full flex flex-col justify-end">
-                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                <h3 class="text-white text-xl font-bold mb-2">Carbon Tracking System</h3>
-                                <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">Real-time carbon footprint monitoring with automated reporting and offset recommendations</p>
-                                <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded-full mr-2">Carbon Analytics</span>
-                                    <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded-full">Sustainability</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">🌱</div>
-                    </div>
-                    
-                    <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-purple-500 to-pink-400 card-hover-effect">
-                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
-                        <div class="relative z-10 p-6 h-full flex flex-col justify-end">
-                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                <h3 class="text-white text-xl font-bold mb-2">Renewable Energy Hub</h3>
-                                <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">Integrated solar, wind, and battery storage system powering 10,000+ homes sustainably</p>
-                                <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <span class="inline-block bg-purple-600 text-white text-xs px-2 py-1 rounded-full mr-2">Renewable Energy</span>
-                                    <span class="inline-block bg-yellow-600 text-white text-xs px-2 py-1 rounded-full">Solar Power</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">☀️</div>
-                    </div>
-                    
-                    <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-teal-500 to-green-400 card-hover-effect">
-                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
-                        <div class="relative z-10 p-6 h-full flex flex-col justify-end">
-                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                <h3 class="text-white text-xl font-bold mb-2">Waste-to-Energy Plant</h3>
-                                <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">Converting 500 tons of waste daily into clean energy while reducing landfill impact</p>
-                                <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <span class="inline-block bg-teal-600 text-white text-xs px-2 py-1 rounded-full mr-2">Waste Management</span>
-                                    <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded-full">Clean Energy</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">♻️</div>
-                    </div>
-                    
-                    <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-orange-500 to-red-400 card-hover-effect">
-                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
-                        <div class="relative z-10 p-6 h-full flex flex-col justify-end">
-                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                <h3 class="text-white text-xl font-bold mb-2">Green Building Network</h3>
-                                <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">LEED Platinum certified buildings with 60% lower energy consumption than traditional structures</p>
-                                <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <span class="inline-block bg-orange-600 text-white text-xs px-2 py-1 rounded-full mr-2">Green Building</span>
-                                    <span class="inline-block bg-red-600 text-white text-xs px-2 py-1 rounded-full">LEED Certified</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">🏢</div>
-                    </div>
-                    
-                    <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-indigo-500 to-purple-400 card-hover-effect">
-                        <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
-                        <div class="relative z-10 p-6 h-full flex flex-col justify-end">
-                            <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
-                                <h3 class="text-white text-xl font-bold mb-2">AI Climate Predictor</h3>
-                                <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">Machine learning platform predicting climate impacts and optimizing sustainability strategies</p>
-                                <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <span class="inline-block bg-indigo-600 text-white text-xs px-2 py-1 rounded-full mr-2">AI/ML</span>
-                                    <span class="inline-block bg-purple-600 text-white text-xs px-2 py-1 rounded-full">Climate Tech</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">🤖</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Enhanced Testimonials Carousel Section -->
-        <section id="testimonials" class="min-h-screen py-20 px-4 section-gray snap-start">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">What Our Clients Say</h2>
-                <p class="text-center text-secondary mb-16 text-lg">Hear from industry leaders who have transformed their operations with our sustainable technology solutions</p>
-                
-                <div class="testimonial-carousel relative max-w-4xl mx-auto">
-                    <!-- Testimonial 1 -->
-                    <div class="testimonial-slide active">
-                        <div class="card-light p-8 md:p-12 rounded-xl shadow-xl border-light text-center">
-                            <div class="quote-mark absolute top-4 left-4">"</div>
-                            <div class="mb-8">
-                                <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                    <span class="text-white text-2xl font-bold">MS</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-primary mb-2">Michael Stevens</h3>
-                                <p class="text-secondary">CEO, GreenTech Industries</p>
-                            </div>
-                            <blockquote class="text-lg md:text-xl text-primary mb-6 italic">
-                                "EcoTech Solutions transformed our entire energy infrastructure. We've reduced our carbon footprint by 45% while cutting operational costs by 30%. Their smart grid technology is revolutionary."
-                            </blockquote>
-                            <div class="flex justify-center space-x-1">
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Testimonial 2 -->
-                    <div class="testimonial-slide">
-                        <div class="card-light p-8 md:p-12 rounded-xl shadow-xl border-light text-center">
-                            <div class="quote-mark absolute top-4 left-4">"</div>
-                            <div class="mb-8">
-                                <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-teal-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                    <span class="text-white text-2xl font-bold">SJ</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-primary mb-2">Sarah Johnson</h3>
-                                <p class="text-secondary">Sustainability Director, Metro City Council</p>
-                            </div>
-                            <blockquote class="text-lg md:text-xl text-primary mb-6 italic">
-                                "The carbon tracking system has been a game-changer for our city's sustainability goals. Real-time monitoring and automated reporting have made compliance effortless and transparent."
-                            </blockquote>
-                            <div class="flex justify-center space-x-1">
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Testimonial 3 -->
-                    <div class="testimonial-slide">
-                        <div class="card-light p-8 md:p-12 rounded-xl shadow-xl border-light text-center">
-                            <div class="quote-mark absolute top-4 left-4">"</div>
-                            <div class="mb-8">
-                                <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                    <span class="text-white text-2xl font-bold">DR</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-primary mb-2">Dr. Robert Chen</h3>
-                                <p class="text-secondary">Chief Technology Officer, FutureCorp</p>
-                            </div>
-                            <blockquote class="text-lg md:text-xl text-primary mb-6 italic">
-                                "Their AI climate predictor has revolutionized our long-term planning. We can now anticipate environmental impacts and optimize our sustainability strategies with unprecedented accuracy."
-                            </blockquote>
-                            <div class="flex justify-center space-x-1">
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Testimonial 4 -->
-                    <div class="testimonial-slide">
-                        <div class="card-light p-8 md:p-12 rounded-xl shadow-xl border-light text-center">
-                            <div class="quote-mark absolute top-4 left-4">"</div>
-                            <div class="mb-8">
-                                <div class="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mx-auto mb-4 flex items-center justify-center">
-                                    <span class="text-white text-2xl font-bold">EM</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-primary mb-2">Elena Martinez</h3>
-                                <p class="text-secondary">Operations Manager, EcoManufacturing Ltd.</p>
-                            </div>
-                            <blockquote class="text-lg md:text-xl text-primary mb-6 italic">
-                                "The waste-to-energy solution has completely transformed our manufacturing process. We've eliminated 95% of our waste while generating clean energy for our operations."
-                            </blockquote>
-                            <div class="flex justify-center space-x-1">
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                                <span class="text-yellow-400 text-xl">★</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Navigation Buttons -->
-                    <button class="carousel-nav prev" id="prevBtn">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                    </button>
-                    <button class="carousel-nav next" id="nextBtn">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </button>
-                </div>
-                
-                <!-- Carousel Indicators -->
-                <div class="carousel-indicators">
-                    <div class="carousel-dot active" data-slide="0"></div>
-                    <div class="carousel-dot" data-slide="1"></div>
-                    <div class="carousel-dot" data-slide="2"></div>
-                    <div class="carousel-dot" data-slide="3"></div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Enhanced Know Our Customers Section -->
-        <section id="customers" class="min-h-screen py-20 px-4 section-light snap-start section-boundary">
-            <div class="max-w-6xl mx-auto">
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Our Global Impact Partners</h2>
-                <p class="text-center text-secondary mb-16 text-lg">Collaborating with visionary organizations across industries to create a sustainable future</p>
-                
-                <!-- Enhanced Customer Stats -->
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-                    <div class="text-center customer-card">
-                        <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent mb-2">500+</div>
-                        <div class="text-secondary font-medium">Global Partners</div>
-                        <div class="text-xs text-secondary mt-1">Across 6 continents</div>
-                    </div>
-                    <div class="text-center customer-card">
-                        <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent mb-2">50+</div>
-                        <div class="text-secondary font-medium">Countries</div>
-                        <div class="text-xs text-secondary mt-1">Worldwide presence</div>
-                    </div>
-                    <div class="text-center customer-card">
-                        <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-2">98%</div>
-                        <div class="text-secondary font-medium">Success Rate</div>
-                        <div class="text-xs text-secondary mt-1">Client satisfaction</div>
-                    </div>
-                    <div class="text-center customer-card">
-                        <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent mb-2">15+</div>
-                        <div class="text-secondary font-medium">Years</div>
-                        <div class="text-xs text-secondary mt-1">Industry expertise</div>
-                    </div>
-                </div>
-                
-                <!-- Enhanced Customer Showcase -->
-                <div class="mb-16">
-                    <h3 class="text-2xl font-bold text-center mb-12 text-primary">Trusted by Industry Leaders</h3>
-                    <div class="customer-grid">
-                        <!-- Customer 1 -->
-                        <div class="customer-card customer-logo">
-                            <div class="w-20 h-20 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
-                                <span class="text-white font-bold text-2xl">GT</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-primary mb-2">GreenTech Industries</h4>
-                            <p class="text-sm text-secondary mb-3">Manufacturing & Energy</p>
-                            <div class="flex justify-center space-x-2 text-xs">
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full">Smart Grid</span>
-                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">IoT</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Customer 2 -->
-                        <div class="customer-card customer-logo">
-                            <div class="w-20 h-20 bg-gradient-to-r from-green-600 to-green-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
-                                <span class="text-white font-bold text-2xl">MC</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-primary mb-2">Metro City Council</h4>
-                            <p class="text-sm text-secondary mb-3">Government & Public Sector</p>
-                            <div class="flex justify-center space-x-2 text-xs">
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full">Carbon Tracking</span>
-                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Analytics</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Customer 3 -->
-                        <div class="customer-card customer-logo">
-                            <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-purple-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
-                                <span class="text-white font-bold text-2xl">FC</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-primary mb-2">FutureCorp</h4>
-                            <p class="text-sm text-secondary mb-3">Technology & Innovation</p>
-                            <div class="flex justify-center space-x-2 text-xs">
-                                <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">AI Climate</span>
-                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Prediction</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Customer 4 -->
-                        <div class="customer-card customer-logo">
-                            <div class="w-20 h-20 bg-gradient-to-r from-orange-600 to-orange-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
-                                <span class="text-white font-bold text-2xl">EM</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-primary mb-2">EcoManufacturing</h4>
-                            <p class="text-sm text-secondary mb-3">Sustainable Manufacturing</p>
-                            <div class="flex justify-center space-x-2 text-xs">
-                                <span class="bg-teal-100 text-teal-800 px-2 py-1 rounded-full">Waste-to-Energy</span>
-                                <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full">Clean Tech</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Customer 5 -->
-                        <div class="customer-card customer-logo">
-                            <div class="w-20 h-20 bg-gradient-to-r from-teal-600 to-teal-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
-                                <span class="text-white font-bold text-2xl">SE</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-primary mb-2">Sustainable Energy Co.</h4>
-                            <p class="text-sm text-secondary mb-3">Renewable Energy</p>
-                            <div class="flex justify-center space-x-2 text-xs">
-                                <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Solar</span>
-                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Wind</span>
-                            </div>
-                        </div>
-                        
-                        <!-- Customer 6 -->
-                        <div class="customer-card customer-logo">
-                            <div class="w-20 h-20 bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
-                                <span class="text-white font-bold text-2xl">AI</span>
-                            </div>
-                            <h4 class="text-lg font-bold text-primary mb-2">AI Innovations Ltd.</h4>
-                            <p class="text-sm text-secondary mb-3">Artificial Intelligence</p>
-                            <div class="flex justify-center space-x-2 text-xs">
-                                <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">Machine Learning</span>
-                                <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Optimization</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Customer Success Metrics -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Success Story 1 -->
-                    <div class="card-light p-6 rounded-xl border-light card-hover-effect">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg flex items-center justify-center mr-4">
-                                <span class="text-white font-bold">GT</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-primary">GreenTech Industries</h3>
-                                <p class="text-sm text-secondary">Manufacturing Excellence</p>
-                            </div>
-                        </div>
-                        <p class="text-secondary mb-4">Implemented our smart grid solution across 15 facilities, achieving remarkable sustainability milestones and operational efficiency.</p>
-                        <div class="space-y-2">
-                            <div class="flex items-center justify-between">
-                                <span class="text-green-600 font-semibold text-sm">45% CO₂ Reduction</span>
-                                <span class="text-blue-600 font-semibold text-sm">$2.3M Saved</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span class="text-purple-600 font-semibold text-sm">15 Facilities</span>
-                                <span class="text-orange-600 font-semibold text-sm">2 Years ROI</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Success Story 2 -->
-                    <div class="card-light p-6 rounded-xl border-light card-hover-effect">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-700 rounded-lg flex items-center justify-center mr-4">
-                                <span class="text-white font-bold">MC</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-primary">Metro City Council</h3>
-                                <p class="text-sm text-secondary">Smart City Initiative</p>
-                            </div>
-                        </div>
-                        <p class="text-secondary mb-4">Deployed comprehensive carbon tracking system enabling transparent environmental monitoring across the entire metropolitan area.</p>
-                        <div class="space-y-2">
-                            <div class="flex items-center justify-between">
-                                <span class="text-green-600 font-semibold text-sm">500+ Buildings</span>
-                                <span class="text-purple-600 font-semibold text-sm">Real-time Data</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span class="text-blue-600 font-semibold text-sm">24/7 Monitoring</span>
-                                <span class="text-orange-600 font-semibold text-sm">30% Efficiency</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Success Story 3 -->
-                    <div class="card-light p-6 rounded-xl border-light card-hover-effect">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-700 rounded-lg flex items-center justify-center mr-4">
-                                <span class="text-white font-bold">EM</span>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-primary">EcoManufacturing</h3>
-                                <p class="text-sm text-secondary">Zero Waste Pioneer</p>
-                            </div>
-                        </div>
-                        <p class="text-secondary mb-4">Revolutionary waste-to-energy implementation achieving near-zero waste production while generating sustainable power for operations.</p>
-                        <div class="space-y-2">
-                            <div class="flex items-center justify-between">
-                                <span class="text-green-600 font-semibold text-sm">95% Waste Converted</span>
-                                <span class="text-orange-600 font-semibold text-sm">60% Self-Powered</span>
-                            </div>
-                            <div class="flex items-center justify-between">
-                                <span class="text-blue-600 font-semibold text-sm">500 Tons/Day</span>
-                                <span class="text-purple-600 font-semibold text-sm">Clean Energy</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- Contact Section -->
-        <section id="contact" class="min-h-screen flex items-center justify-center section-gray snap-start section-boundary">
-            <div class="max-w-md w-full card-light p-10 rounded-xl shadow-lg mx-4 border-light">
-                <h2 class="text-3xl font-bold text-center mb-4 text-primary">Partner With Us</h2>
-                <p class="text-center text-secondary mb-8">Join our mission to create sustainable technology solutions for a greener future</p>
-                <form id="contactForm" class="space-y-6">
-                    <div>
-                        <label for="name" class="block text-secondary mb-2 font-medium">Full Name</label>
-                        <input type="text" id="name" class="form-input w-full px-4 py-3 rounded-lg transition-all duration-300">
-                    </div>
-                    <div>
-                        <label for="email" class="block text-secondary mb-2 font-medium">Email Address</label>
-                        <input type="email" id="email" class="form-input w-full px-4 py-3 rounded-lg transition-all duration-300">
-                    </div>
-                    <div>
-                        <label for="company" class="block text-secondary mb-2 font-medium">Company/Organization</label>
-                        <input type="text" id="company" class="form-input w-full px-4 py-3 rounded-lg transition-all duration-300">
-                    </div>
-                    <div>
-                        <label for="message" class="block text-secondary mb-2 font-medium">How can we collaborate?</label>
-                        <textarea id="message" rows="4" class="form-input w-full px-4 py-3 rounded-lg transition-all duration-300" placeholder="Tell us about your sustainability goals..."></textarea>
-                    </div>
-                    <button id="contactButton" type="button" class="ripple-effect w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
-                        Start Collaboration
-                    </button>
-                </form>
-            </div>
-        </section>
-    </div>
-
-    <!-- Footer -->
-    <footer class="footer-gradient py-16 px-4">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-                <!-- Company Info -->
-                <div class="md:col-span-2">
-                    <div class="flex items-center space-x-2 mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
-                            <span class="text-white font-bold">ET</span>
-                        </div>
-                        <span class="text-2xl font-bold text-primary">EcoTech Solutions</span>
-                    </div>
-                    <p class="text-secondary mb-6 max-w-md">Leading the transition to sustainable technology with innovative solutions that reduce carbon footprint while driving business growth.</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="w-10 h-10 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-blue-500 hover:bg-blue-600 rounded-full flex items-center justify-center text-white transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-                        </a>
-                        <a href="#" class="w-10 h-10 bg-purple-500 hover:bg-purple-600 rounded-full flex items-center justify-center text-white transition-colors">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z"/></svg>
-                        </a>
-                    </div>
-                </div>
-                
-                <!-- Quick Links -->
-                <div>
-                    <h3 class="text-lg font-semibold text-primary mb-4">Solutions</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Smart Grid Technology</a></li>
-                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Carbon Analytics</a></li>
-                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Renewable Energy</a></li>
-                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Green Building</a></li>
-                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Waste Management</a></li>
-                    </ul>
-                </div>
-                
-                <!-- Resources -->
-                <div>
-                    <h3 class="text-lg font-semibold text-primary mb-4">Resources</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Sustainability Report</a></li>
-                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Case Studies</a></li>
-                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">White Papers</a></li>
-                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">API Documentation</a></li>
-                        <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Support Center</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <!-- Newsletter Signup -->
-            <div class="border-t border-light pt-8 mb-8">
-                <div class="max-w-md mx-auto text-center">
-                    <h3 class="text-lg font-semibold text-primary mb-2">Stay Updated</h3>
-                    <p class="text-secondary mb-4">Get the latest sustainability insights and technology updates</p>
-                    <div class="flex gap-2">
-                        <input type="email" placeholder="Enter your email" class="form-input flex-1 px-4 py-2 rounded-lg">
-                        <button class="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300">
-                            Subscribe
+                <div class="relative z-10 text-center px-4 max-w-5xl mx-auto">
+                    <h1 class="text-5xl md:text-7xl font-bold mb-6 fade-in-up" style="animation-delay: 0.2s;">
+                        Sustainable Technology
+                        <span class="block text-green-400">for a Better Future</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl mb-8 text-gray-200 fade-in-up" style="animation-delay: 0.4s;">
+                        Leading the transition to carbon-neutral technology solutions with innovative green infrastructure and sustainable business practices
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center fade-in-up" style="animation-delay: 0.6s;">
+                        <button id="heroButton" class="ripple-effect bg-green-500 hover:bg-green-600 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-300">
+                            Explore Our Impact
+                        </button>
+                        <button id="viewSolutionsButton" class="ripple-effect border-2 border-white text-white hover:bg-white hover:text-green-900 font-bold py-4 px-8 rounded-full text-lg transition-all duration-300">
+                            View Solutions
                         </button>
                     </div>
                 </div>
-            </div>
+                
+                <!-- Scroll indicator -->
+                <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                </div>
+            </section>
             
-            <!-- Bottom Footer -->
-            <div class="border-t border-light pt-8 flex flex-col md:flex-row justify-between items-center">
-                <div class="text-secondary text-sm mb-4 md:mb-0">
-                    © 2024 EcoTech Solutions. All rights reserved. | Building a sustainable future through technology.
+            <!-- Sustainability Partners Section -->
+            <section id="sustainability" class="section-full py-20 px-4 section-gray">
+                <div class="max-w-4xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Sustainability Partners</h2>
+                    <p class="text-center text-secondary mb-16 text-lg">Collaborating with leading organizations to drive environmental innovation</p>
+                    <div class="space-y-4">
+                        <div class="brand-card p-6 rounded-xl flex items-center justify-between hover:bg-opacity-20 transition-all duration-300">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-xs font-bold">EC</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-primary text-xl font-medium">EcoCorp</span>
+                                        <p class="text-secondary text-sm">Renewable Energy Solutions</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-green-500 text-sm font-medium">Active Partner</div>
+                        </div>
+                        
+                        <div class="brand-card p-6 rounded-xl flex items-center justify-between hover:bg-opacity-20 transition-all duration-300">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-xs font-bold">IC</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-primary text-xl font-medium">InnovaCorp</span>
+                                        <p class="text-secondary text-sm">Smart Grid Technology</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-blue-500 text-sm font-medium">Strategic Alliance</div>
+                        </div>
+                        
+                        <div class="brand-card p-6 rounded-xl flex items-center justify-between hover:bg-opacity-20 transition-all duration-300">
+                            <div class="flex items-center space-x-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center">
+                                        <span class="text-white text-xs font-bold">GA</span>
+                                    </div>
+                                    <div>
+                                        <span class="text-primary text-xl font-medium">Green Alliance</span>
+                                        <p class="text-secondary text-sm">Carbon Offset Programs</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-purple-500 text-sm font-medium">Lead Partner</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="flex space-x-6 text-sm">
-                    <a href="#" class="text-secondary hover:text-green-500 transition-colors">Privacy Policy</a>
-                    <a href="#" class="text-secondary hover:text-green-500 transition-colors">Terms of Service</a>
-                    <a href="#" class="text-secondary hover:text-green-500 transition-colors">Cookie Policy</a>
+            </section>
+            
+            <!-- Environmental Impact Stats -->
+            <section id="impact" class="section-full py-20 px-4 section-light">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Environmental Impact Metrics</h2>
+                    <p class="text-center text-secondary mb-16 text-lg">Tracking our progress towards carbon neutrality and sustainable operations</p>
+                    
+                    <!-- Main Impact Cards -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                        <div class="card-light p-8 rounded-xl shadow-xl border-light">
+                            <h3 class="text-lg font-medium text-secondary mb-2">Carbon Footprint Reduction</h3>
+                            <div class="text-4xl font-bold text-primary mb-2">45,048</div>
+                            <div class="text-sm text-secondary mb-4">tCO₂e saved annually</div>
+                            <div class="flex items-center text-green-600">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                                <span class="text-sm">32% improvement since 2019</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-light p-8 rounded-xl shadow-xl border-light">
+                            <h3 class="text-lg font-medium text-secondary mb-2">Energy Efficiency</h3>
+                            <div class="text-4xl font-bold text-primary mb-2">123</div>
+                            <div class="text-sm text-secondary mb-4">kWh/m² average consumption</div>
+                            <div class="flex items-center text-green-600">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                                <span class="text-sm">28% below industry average</span>
+                            </div>
+                        </div>
+                        
+                        <div class="card-light p-8 rounded-xl shadow-xl border-light">
+                            <h3 class="text-lg font-medium text-secondary mb-2">Renewable Energy Usage</h3>
+                            <div class="text-4xl font-bold text-primary mb-2">47.8M</div>
+                            <div class="text-sm text-secondary mb-4">kWh from renewable sources</div>
+                            <div class="flex items-center text-green-600">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                                <span class="text-sm">85% of total energy consumption</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Progress Tracking -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="card-light p-6 rounded-xl border-light">
+                            <h4 class="font-medium text-primary mb-4">Carbon Reduction Progress</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-secondary">2024 Target</span>
+                                        <span class="text-primary">45,048 tCO₂e</span>
+                                    </div>
+                                    <div class="stat-progress">
+                                        <div class="stat-fill" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-secondary">2023 Achievement</span>
+                                        <span class="text-primary">38,200 tCO₂e</span>
+                                    </div>
+                                    <div class="stat-progress">
+                                        <div class="stat-fill" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-secondary">2022 Baseline</span>
+                                        <span class="text-primary">32,813 tCO₂e</span>
+                                    </div>
+                                    <div class="stat-progress">
+                                        <div class="stat-fill" style="width: 73%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-light p-6 rounded-xl border-light">
+                            <h4 class="font-medium text-primary mb-4">Energy Efficiency Gains</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-secondary">Current Performance</span>
+                                        <span class="text-primary">123 kWh/m²</span>
+                                    </div>
+                                    <div class="stat-progress">
+                                        <div class="stat-fill" style="width: 78%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-secondary">2023 Performance</span>
+                                        <span class="text-primary">135 kWh/m²</span>
+                                    </div>
+                                    <div class="stat-progress">
+                                        <div class="stat-fill" style="width: 86%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-secondary">Industry Average</span>
+                                        <span class="text-primary">171 kWh/m²</span>
+                                    </div>
+                                    <div class="stat-progress">
+                                        <div class="stat-fill" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-light p-6 rounded-xl border-light">
+                            <h4 class="font-medium text-primary mb-4">Renewable Energy Adoption</h4>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-secondary">2024 Usage</span>
+                                        <span class="text-primary">47.8M kWh</span>
+                                    </div>
+                                    <div class="stat-progress">
+                                        <div class="stat-fill" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-secondary">2023 Usage</span>
+                                        <span class="text-primary">42.1M kWh</span>
+                                    </div>
+                                    <div class="stat-progress">
+                                        <div class="stat-fill" style="width: 75%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-secondary">2022 Usage</span>
+                                        <span class="text-primary">35.6M kWh</span>
+                                    </div>
+                                    <div class="stat-progress">
+                                        <div class="stat-fill" style="width: 63%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Carbon Emissions Analytics -->
+            <section id="solutions" class="section-full py-20 px-4 section-gray">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Carbon Emissions Analytics</h2>
+                    <p class="text-center text-secondary mb-16 text-lg">Real-time monitoring and analysis of our carbon reduction initiatives across all facilities</p>
+                    
+                    <!-- Filter Controls -->
+                    <div class="mb-8 space-y-4">
+                        <div>
+                            <h3 class="text-lg font-medium text-primary mb-3">Filter by Facility Type</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="text-sm text-secondary">Type</span>
+                                <button class="filter-button px-4 py-2 bg-green-100 text-green-800 rounded-full text-sm hover:bg-green-200 transition-colors" data-filter="green-retrofit">Green Retrofit</button>
+                                <button class="filter-button px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm hover:bg-blue-200 transition-colors" data-filter="new-build">New Sustainable Build</button>
+                                <button class="filter-button px-4 py-2 bg-purple-600 text-white rounded-full text-sm hover:bg-purple-700 transition-colors active" data-filter="all">All Facilities</button>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="text-sm text-secondary">Status</span>
+                                <button class="filter-button px-4 py-2 bg-green-600 text-white rounded-full text-sm hover:bg-green-700 transition-colors active" data-status="operational">Operational</button>
+                                <button class="filter-button px-4 py-2 bg-gray-200 text-gray-700 rounded-full text-sm hover:bg-gray-300 transition-colors" data-status="construction">Under Construction</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chart Container -->
+                    <div class="card-light p-6 rounded-xl border-light">
+                        <canvas id="emissionsChart" width="400" height="200"></canvas>
+                    </div>
+                    
+                    <!-- Chart Legend -->
+                    <div class="mt-6 flex flex-wrap gap-6 justify-center">
+                        <div class="flex items-center">
+                            <div class="w-4 h-0.5 bg-green-500 mr-2"></div>
+                            <span class="text-sm text-secondary">Target: 300 kgCO₂e/m² by 2030</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-0.5 bg-blue-500 mr-2"></div>
+                            <span class="text-sm text-secondary">Current Average: 425 kgCO₂e/m²</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sustainable Projects Portfolio -->
+            <section id="projects" class="section-full py-20 px-4 section-light">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Sustainable Technology Projects</h2>
+                    <p class="text-center text-secondary mb-16 text-lg">Innovative solutions driving environmental sustainability across industries</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-green-500 to-emerald-400 card-hover-effect">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                            <div class="relative z-10 p-6 h-full flex flex-col justify-end">
+                                <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                    <h3 class="text-white text-xl font-bold mb-2">Smart Grid Platform</h3>
+                                    <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">AI-powered energy distribution system reducing waste by 35% across 50+ facilities</p>
+                                    <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded-full mr-2">Energy Efficiency</span>
+                                        <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded-full">IoT Integration</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">⚡</div>
+                        </div>
+                        
+                        <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-blue-500 to-cyan-400 card-hover-effect">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                            <div class="relative z-10 p-6 h-full flex flex-col justify-end">
+                                <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                    <h3 class="text-white text-xl font-bold mb-2">Carbon Tracking System</h3>
+                                    <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">Real-time carbon footprint monitoring with automated reporting and offset recommendations</p>
+                                    <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <span class="inline-block bg-blue-600 text-white text-xs px-2 py-1 rounded-full mr-2">Carbon Analytics</span>
+                                        <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded-full">Sustainability</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">🌱</div>
+                        </div>
+                        
+                        <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-purple-500 to-pink-400 card-hover-effect">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                            <div class="relative z-10 p-6 h-full flex flex-col justify-end">
+                                <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                    <h3 class="text-white text-xl font-bold mb-2">Renewable Energy Hub</h3>
+                                    <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">Integrated solar, wind, and battery storage system powering 10,000+ homes sustainably</p>
+                                    <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <span class="inline-block bg-purple-600 text-white text-xs px-2 py-1 rounded-full mr-2">Renewable Energy</span>
+                                        <span class="inline-block bg-yellow-600 text-white text-xs px-2 py-1 rounded-full">Solar Power</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">☀️</div>
+                        </div>
+                        
+                        <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-teal-500 to-green-400 card-hover-effect">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                            <div class="relative z-10 p-6 h-full flex flex-col justify-end">
+                                <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                    <h3 class="text-white text-xl font-bold mb-2">Waste-to-Energy Plant</h3>
+                                    <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">Converting 500 tons of waste daily into clean energy while reducing landfill impact</p>
+                                    <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <span class="inline-block bg-teal-600 text-white text-xs px-2 py-1 rounded-full mr-2">Waste Management</span>
+                                        <span class="inline-block bg-green-600 text-white text-xs px-2 py-1 rounded-full">Clean Energy</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">♻️</div>
+                        </div>
+                        
+                        <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-orange-500 to-red-400 card-hover-effect">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                            <div class="relative z-10 p-6 h-full flex flex-col justify-end">
+                                <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                    <h3 class="text-white text-xl font-bold mb-2">Green Building Network</h3>
+                                    <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">LEED Platinum certified buildings with 60% lower energy consumption than traditional structures</p>
+                                    <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <span class="inline-block bg-orange-600 text-white text-xs px-2 py-1 rounded-full mr-2">Green Building</span>
+                                        <span class="inline-block bg-red-600 text-white text-xs px-2 py-1 rounded-full">LEED Certified</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">🏢</div>
+                        </div>
+                        
+                        <div class="portfolio-item relative group overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-indigo-500 to-purple-400 card-hover-effect">
+                            <div class="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-300"></div>
+                            <div class="relative z-10 p-6 h-full flex flex-col justify-end">
+                                <div class="transform translate-y-4 group-hover:translate-y-0 transition-all duration-500">
+                                    <h3 class="text-white text-xl font-bold mb-2">AI Climate Predictor</h3>
+                                    <p class="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">Machine learning platform predicting climate impacts and optimizing sustainability strategies</p>
+                                    <div class="mt-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                        <span class="inline-block bg-indigo-600 text-white text-xs px-2 py-1 rounded-full mr-2">AI/ML</span>
+                                        <span class="inline-block bg-purple-600 text-white text-xs px-2 py-1 rounded-full">Climate Tech</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">🤖</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Enhanced Testimonials Carousel Section -->
+            <section id="testimonials" class="section-full py-20 px-4 section-gray">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">What Our Clients Say</h2>
+                    <p class="text-center text-secondary mb-16 text-lg">Hear from industry leaders who have transformed their operations with our sustainable technology solutions</p>
+                    
+                    <div class="testimonial-carousel relative max-w-4xl mx-auto">
+                        <!-- Testimonial 1 -->
+                        <div class="testimonial-slide active">
+                            <div class="card-light p-8 md:p-12 rounded-xl shadow-xl border-light text-center">
+                                <div class="quote-mark absolute top-4 left-4">"</div>
+                                <div class="mb-8">
+                                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                        <span class="text-white text-2xl font-bold">MS</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-primary mb-2">Michael Stevens</h3>
+                                    <p class="text-secondary">CEO, GreenTech Industries</p>
+                                </div>
+                                <blockquote class="text-lg md:text-xl text-primary mb-6 italic">
+                                    "EcoTech Solutions transformed our entire energy infrastructure. We've reduced our carbon footprint by 45% while cutting operational costs by 30%. Their smart grid technology is revolutionary."
+                                </blockquote>
+                                <div class="flex justify-center space-x-1">
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="testimonial-slide">
+                            <div class="card-light p-8 md:p-12 rounded-xl shadow-xl border-light text-center">
+                                <div class="quote-mark absolute top-4 left-4">"</div>
+                                <div class="mb-8">
+                                    <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-teal-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                        <span class="text-white text-2xl font-bold">SJ</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-primary mb-2">Sarah Johnson</h3>
+                                    <p class="text-secondary">Sustainability Director, Metro City Council</p>
+                                </div>
+                                <blockquote class="text-lg md:text-xl text-primary mb-6 italic">
+                                    "The carbon tracking system has been a game-changer for our city's sustainability goals. Real-time monitoring and automated reporting have made compliance effortless and transparent."
+                                </blockquote>
+                                <div class="flex justify-center space-x-1">
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="testimonial-slide">
+                            <div class="card-light p-8 md:p-12 rounded-xl shadow-xl border-light text-center">
+                                <div class="quote-mark absolute top-4 left-4">"</div>
+                                <div class="mb-8">
+                                    <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                        <span class="text-white text-2xl font-bold">DR</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-primary mb-2">Dr. Robert Chen</h3>
+                                    <p class="text-secondary">Chief Technology Officer, FutureCorp</p>
+                                </div>
+                                <blockquote class="text-lg md:text-xl text-primary mb-6 italic">
+                                    "Their AI climate predictor has revolutionized our long-term planning. We can now anticipate environmental impacts and optimize our sustainability strategies with unprecedented accuracy."
+                                </blockquote>
+                                <div class="flex justify-center space-x-1">
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 4 -->
+                        <div class="testimonial-slide">
+                            <div class="card-light p-8 md:p-12 rounded-xl shadow-xl border-light text-center">
+                                <div class="quote-mark absolute top-4 left-4">"</div>
+                                <div class="mb-8">
+                                    <div class="w-20 h-20 bg-gradient-to-r from-orange-500 to-red-500 rounded-full mx-auto mb-4 flex items-center justify-center">
+                                        <span class="text-white text-2xl font-bold">EM</span>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-primary mb-2">Elena Martinez</h3>
+                                    <p class="text-secondary">Operations Manager, EcoManufacturing Ltd.</p>
+                                </div>
+                                <blockquote class="text-lg md:text-xl text-primary mb-6 italic">
+                                    "The waste-to-energy solution has completely transformed our manufacturing process. We've eliminated 95% of our waste while generating clean energy for our operations."
+                                </blockquote>
+                                <div class="flex justify-center space-x-1">
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                    <span class="text-yellow-400 text-xl">★</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Navigation Buttons -->
+                        <button class="carousel-nav prev" id="prevBtn">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                        </button>
+                        <button class="carousel-nav next" id="nextBtn">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Carousel Indicators -->
+                    <div class="carousel-indicators">
+                        <div class="carousel-dot active" data-slide="0"></div>
+                        <div class="carousel-dot" data-slide="1"></div>
+                        <div class="carousel-dot" data-slide="2"></div>
+                        <div class="carousel-dot" data-slide="3"></div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Enhanced Know Our Customers Section -->
+            <section id="customers" class="section-full py-20 px-4 section-light">
+                <div class="max-w-6xl mx-auto">
+                    <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-primary">Our Global Impact Partners</h2>
+                    <p class="text-center text-secondary mb-16 text-lg">Collaborating with visionary organizations across industries to create a sustainable future</p>
+                    
+                    <!-- Enhanced Customer Stats -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+                        <div class="text-center customer-card">
+                            <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-500 to-blue-500 bg-clip-text text-transparent mb-2">500+</div>
+                            <div class="text-secondary font-medium">Global Partners</div>
+                            <div class="text-xs text-secondary mt-1">Across 6 continents</div>
+                        </div>
+                        <div class="text-center customer-card">
+                            <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent mb-2">50+</div>
+                            <div class="text-secondary font-medium">Countries</div>
+                            <div class="text-xs text-secondary mt-1">Worldwide presence</div>
+                        </div>
+                        <div class="text-center customer-card">
+                            <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent mb-2">98%</div>
+                            <div class="text-secondary font-medium">Success Rate</div>
+                            <div class="text-xs text-secondary mt-1">Client satisfaction</div>
+                        </div>
+                        <div class="text-center customer-card">
+                            <div class="text-4xl md:text-5xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent mb-2">15+</div>
+                            <div class="text-secondary font-medium">Years</div>
+                            <div class="text-xs text-secondary mt-1">Industry expertise</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Enhanced Customer Showcase -->
+                    <div class="mb-16">
+                        <h3 class="text-2xl font-bold text-center mb-12 text-primary">Trusted by Industry Leaders</h3>
+                        <div class="customer-grid">
+                            <!-- Customer 1 -->
+                            <div class="customer-card customer-logo">
+                                <div class="w-20 h-20 bg-gradient-to-r from-blue-600 to-blue-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-white font-bold text-2xl">GT</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-primary mb-2">GreenTech Industries</h4>
+                                <p class="text-sm text-secondary mb-3">Manufacturing & Energy</p>
+                                <div class="flex justify-center space-x-2 text-xs">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full">Smart Grid</span>
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">IoT</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Customer 2 -->
+                            <div class="customer-card customer-logo">
+                                <div class="w-20 h-20 bg-gradient-to-r from-green-600 to-green-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-white font-bold text-2xl">MC</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Metro City Council</h4>
+                                <p class="text-sm text-secondary mb-3">Government & Public Sector</p>
+                                <div class="flex justify-center space-x-2 text-xs">
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full">Carbon Tracking</span>
+                                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Analytics</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Customer 3 -->
+                            <div class="customer-card customer-logo">
+                                <div class="w-20 h-20 bg-gradient-to-r from-purple-600 to-purple-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-white font-bold text-2xl">FC</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-primary mb-2">FutureCorp</h4>
+                                <p class="text-sm text-secondary mb-3">Technology & Innovation</p>
+                                <div class="flex justify-center space-x-2 text-xs">
+                                    <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">AI Climate</span>
+                                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Prediction</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Customer 4 -->
+                            <div class="customer-card customer-logo">
+                                <div class="w-20 h-20 bg-gradient-to-r from-orange-600 to-orange-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-white font-bold text-2xl">EM</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-primary mb-2">EcoManufacturing</h4>
+                                <p class="text-sm text-secondary mb-3">Sustainable Manufacturing</p>
+                                <div class="flex justify-center space-x-2 text-xs">
+                                    <span class="bg-teal-100 text-teal-800 px-2 py-1 rounded-full">Waste-to-Energy</span>
+                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full">Clean Tech</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Customer 5 -->
+                            <div class="customer-card customer-logo">
+                                <div class="w-20 h-20 bg-gradient-to-r from-teal-600 to-teal-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-white font-bold text-2xl">SE</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-primary mb-2">Sustainable Energy Co.</h4>
+                                <p class="text-sm text-secondary mb-3">Renewable Energy</p>
+                                <div class="flex justify-center space-x-2 text-xs">
+                                    <span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">Solar</span>
+                                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">Wind</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Customer 6 -->
+                            <div class="customer-card customer-logo">
+                                <div class="w-20 h-20 bg-gradient-to-r from-indigo-600 to-indigo-800 rounded-xl mx-auto mb-4 flex items-center justify-center">
+                                    <span class="text-white font-bold text-2xl">AI</span>
+                                </div>
+                                <h4 class="text-lg font-bold text-primary mb-2">AI Innovations Ltd.</h4>
+                                <p class="text-sm text-secondary mb-3">Artificial Intelligence</p>
+                                <div class="flex justify-center space-x-2 text-xs">
+                                    <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full">Machine Learning</span>
+                                    <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full">Optimization</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Customer Success Metrics -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Success Story 1 -->
+                        <div class="card-light p-6 rounded-xl border-light card-hover-effect">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-700 rounded-lg flex items-center justify-center mr-4">
+                                    <span class="text-white font-bold">GT</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-primary">GreenTech Industries</h3>
+                                    <p class="text-sm text-secondary">Manufacturing Excellence</p>
+                                </div>
+                            </div>
+                            <p class="text-secondary mb-4">Implemented our smart grid solution across 15 facilities, achieving remarkable sustainability milestones and operational efficiency.</p>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-green-600 font-semibold text-sm">45% CO₂ Reduction</span>
+                                    <span class="text-blue-600 font-semibold text-sm">$2.3M Saved</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-purple-600 font-semibold text-sm">15 Facilities</span>
+                                    <span class="text-orange-600 font-semibold text-sm">2 Years ROI</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Success Story 2 -->
+                        <div class="card-light p-6 rounded-xl border-light card-hover-effect">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-green-700 rounded-lg flex items-center justify-center mr-4">
+                                    <span class="text-white font-bold">MC</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-primary">Metro City Council</h3>
+                                    <p class="text-sm text-secondary">Smart City Initiative</p>
+                                </div>
+                            </div>
+                            <p class="text-secondary mb-4">Deployed comprehensive carbon tracking system enabling transparent environmental monitoring across the entire metropolitan area.</p>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-green-600 font-semibold text-sm">500+ Buildings</span>
+                                    <span class="text-purple-600 font-semibold text-sm">Real-time Data</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-blue-600 font-semibold text-sm">24/7 Monitoring</span>
+                                    <span class="text-orange-600 font-semibold text-sm">30% Efficiency</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Success Story 3 -->
+                        <div class="card-light p-6 rounded-xl border-light card-hover-effect">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-orange-500 to-orange-700 rounded-lg flex items-center justify-center mr-4">
+                                    <span class="text-white font-bold">EM</span>
+                                </div>
+                                <div>
+                                    <h3 class="font-bold text-primary">EcoManufacturing</h3>
+                                    <p class="text-sm text-secondary">Zero Waste Pioneer</p>
+                                </div>
+                            </div>
+                            <p class="text-secondary mb-4">Revolutionary waste-to-energy implementation achieving near-zero waste production while generating sustainable power for operations.</p>
+                            <div class="space-y-2">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-green-600 font-semibold text-sm">95% Waste Converted</span>
+                                    <span class="text-orange-600 font-semibold text-sm">60% Self-Powered</span>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <span class="text-blue-600 font-semibold text-sm">500 Tons/Day</span>
+                                    <span class="text-purple-600 font-semibold text-sm">Clean Energy</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Contact Section -->
+            <section id="contact" class="section-full py-20 px-4 section-gray">
+                <div class="flex items-center justify-center min-h-screen">
+                    <div class="max-w-md w-full card-light p-10 rounded-xl shadow-lg mx-4 border-light">
+                        <h2 class="text-3xl font-bold text-center mb-4 text-primary">Partner With Us</h2>
+                        <p class="text-center text-secondary mb-8">Join our mission to create sustainable technology solutions for a greener future</p>
+                        <form id="contactForm" class="space-y-6">
+                            <div>
+                                <label for="name" class="block text-secondary mb-2 font-medium">Full Name</label>
+                                <input type="text" id="name" class="form-input w-full px-4 py-3 rounded-lg transition-all duration-300">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-secondary mb-2 font-medium">Email Address</label>
+                                <input type="email" id="email" class="form-input w-full px-4 py-3 rounded-lg transition-all duration-300">
+                            </div>
+                            <div>
+                                <label for="company" class="block text-secondary mb-2 font-medium">Company/Organization</label>
+                                <input type="text" id="company" class="form-input w-full px-4 py-3 rounded-lg transition-all duration-300">
+                            </div>
+                            <div>
+                                <label for="message" class="block text-secondary mb-2 font-medium">How can we collaborate?</label>
+                                <textarea id="message" rows="4" class="form-input w-full px-4 py-3 rounded-lg transition-all duration-300" placeholder="Tell us about your sustainability goals..."></textarea>
+                            </div>
+                            <button id="contactButton" type="button" class="ripple-effect w-full bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white py-3 px-6 rounded-lg font-semibold transition-all duration-300 shadow-lg hover:shadow-xl">
+                                Start Collaboration
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Footer - Now inside main container -->
+        <footer class="footer-gradient py-16 px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                    <!-- Company Info -->
+                    <div class="md:col-span-2">
+                        <div class="flex items-center space-x-2 mb-4">
+                            <div class="w-10 h-10 bg-gradient-to-r from-green-500 to-blue-500 rounded-lg flex items-center justify-center">
+                                <span class="text-white font-bold">ET</span>
+                            </div>
+                            <span class="text-2xl font-bold text-primary">EcoTech Solutions</span>
+                        </div>
+                        <p class="text-secondary mb-6 max-w-md">Leading the transition to sustainable technology with innovative solutions that reduce carbon footprint while driving business growth.</p>
+                        <div class="flex space-x-4">
+                            <a href="#" class="w-10 h-10 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center text-white transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-blue-500 hover:bg-blue-600 rounded-full flex items-center justify-center text-white transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                            </a>
+                            <a href="#" class="w-10 h-10 bg-purple-500 hover:bg-purple-600 rounded-full flex items-center justify-center text-white transition-colors">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 5.079 3.158 9.417 7.618 11.174-.105-.949-.199-2.403.041-3.439.219-.937 1.406-5.957 1.406-5.957s-.359-.72-.359-1.781c0-1.663.967-2.911 2.168-2.911 1.024 0 1.518.769 1.518 1.688 0 1.029-.653 2.567-.992 3.992-.285 1.193.6 2.165 1.775 2.165 2.128 0 3.768-2.245 3.768-5.487 0-2.861-2.063-4.869-5.008-4.869-3.41 0-5.409 2.562-5.409 5.199 0 1.033.394 2.143.889 2.741.099.12.112.225.085.345-.09.375-.293 1.199-.334 1.363-.053.225-.172.271-.402.165-1.495-.69-2.433-2.878-2.433-4.646 0-3.776 2.748-7.252 7.92-7.252 4.158 0 7.392 2.967 7.392 6.923 0 4.135-2.607 7.462-6.233 7.462-1.214 0-2.357-.629-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24.009 12.017 24c6.624 0 11.99-5.367 11.99-11.988C24.007 5.367 18.641.001 12.017.001z"/></svg>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Links -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-primary mb-4">Solutions</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Smart Grid Technology</a></li>
+                            <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Carbon Analytics</a></li>
+                            <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Renewable Energy</a></li>
+                            <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Green Building</a></li>
+                            <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Waste Management</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Resources -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-primary mb-4">Resources</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Sustainability Report</a></li>
+                            <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Case Studies</a></li>
+                            <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">White Papers</a></li>
+                            <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">API Documentation</a></li>
+                            <li><a href="#" class="text-secondary hover:text-green-500 transition-colors">Support Center</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Newsletter Signup -->
+                <div class="border-t border-light pt-8 mb-8">
+                    <div class="max-w-md mx-auto text-center">
+                        <h3 class="text-lg font-semibold text-primary mb-2">Stay Updated</h3>
+                        <p class="text-secondary mb-4">Get the latest sustainability insights and technology updates</p>
+                        <div class="flex gap-2">
+                            <input type="email" placeholder="Enter your email" class="form-input flex-1 px-4 py-2 rounded-lg">
+                            <button class="bg-gradient-to-r from-green-500 to-blue-500 hover:from-green-600 hover:to-blue-600 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300">
+                                Subscribe
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Bottom Footer -->
+                <div class="border-t border-light pt-8 flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-secondary text-sm mb-4 md:mb-0">
+                        © 2024 EcoTech Solutions. All rights reserved. | Building a sustainable future through technology.
+                    </div>
+                    <div class="flex space-x-6 text-sm">
+                        <a href="#" class="text-secondary hover:text-green-500 transition-colors">Privacy Policy</a>
+                        <a href="#" class="text-secondary hover:text-green-500 transition-colors">Terms of Service</a>
+                        <a href="#" class="text-secondary hover:text-green-500 transition-colors">Cookie Policy</a>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </div>
 
     <script>
         // Chart data sets for different filters
