@@ -32,8 +32,6 @@ Welcome to **EcoTech Solutions**, a responsive and innovative platform built for
 - 🎨 **Tailwind CSS** – Utility-first styling framework for rapid design
 - 🧠 **JavaScript (ES6+)** – Dynamic logic, interactivity, and chart filtering
 - 📊 **Chart.js** – Powerful JavaScript charting library for analytics
-- 🌗 **Custom Theme Toggle** – Light/Dark mode with animated emoji switch
-- 🌀 **CSS Animations & Transitions** – Smooth effects and enhanced UX
 - 🚀 **CDN Assets** – Fast-loading with zero external build tools
 ---
 
