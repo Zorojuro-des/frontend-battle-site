@@ -10,7 +10,6 @@ Welcome to **EcoTech Solutions**, a responsive and innovative platform built for
 - **Event:** Frontend Battle 2.0 – Round 1
 - **Date:** June 19, 2025
 - **Time:** 2:00 PM – 6:00 PM IST
-- **Duration:** 4 hours
 - **Task:** Replicate & Innovate a UI based on provided assets with added features
 
 ---
@@ -26,6 +25,20 @@ Welcome to **EcoTech Solutions**, a responsive and innovative platform built for
 | Minimum 6 Features | ✅ Over 6+ major features implemented |
 | Deployed Link | [Live Demo ](https://frontendbattlesite.tiiny.site) |
 
+---
+## 🔧 Built With
+
+- 🧩 **HTML5** – Semantic structure and accessible markup
+- 🎨 **Tailwind CSS** – Utility-first styling framework for rapid design
+- 🧠 **JavaScript (ES6+)** – Dynamic logic, interactivity, and chart filtering
+- 📊 **Chart.js** – Powerful JavaScript charting library for analytics
+- 🌗 **Custom Theme Toggle** – Light/Dark mode with animated emoji switch
+- 🌀 **CSS Animations & Transitions** – Smooth effects and enhanced UX
+- 🚀 **CDN Assets** – Fast-loading with zero external build tools
+- 🧪 **AI Tooling**:
+  - [v0.dev](https://v0.dev) for layout structuring
+  - [ChatGPT](https://chat.openai.com) for scripting and interactivity
+  - [blackbox.ai](https://www.blackbox.ai) for code completion and snippets
 ---
 
 ## 💡 Features Implemented
