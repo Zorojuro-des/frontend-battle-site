@@ -53,12 +53,6 @@ This website was built with the assistance of modern AI-powered tools:
 
 ---
 
-## 📸 Preview
-
-> *(You can insert a screenshot or live demo link here if available)*
-
----
-
 ## ✍️ Credits
 
 Created with the support of:
