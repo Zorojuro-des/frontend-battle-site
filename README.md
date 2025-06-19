@@ -23,7 +23,7 @@ Welcome to **EcoTech Solutions**, a responsive and innovative platform built for
 | Loader Implementation | ✅ Custom animated loader based on provided asset |
 | Navbar + Section Linking | ✅ All headings in navbar linked to corresponding sections |
 | Light & Dark Mode | ✅ Seamless theme toggle implemented |
-| Minimum 6 Features | ✅ Over 10+ major features implemented |
+| Minimum 6 Features | ✅ Over 6+ major features implemented |
 | Deployed Link | [Live Demo (example)](https://frontendbattlesite.tiiny.site) |
 
 ---
@@ -45,11 +45,7 @@ Welcome to **EcoTech Solutions**, a responsive and innovative platform built for
 
 ## ⚙️ How to Run Locally
 
-```bash
-git clone https://github.com/yourusername/ecotech-battle.git
-cd ecotech-battle
-open index.html
-```
+Download and extract the zip file. Open the index.html
 
 > No build step required. All assets load via CDN.
 
@@ -71,17 +67,6 @@ As permitted by the competition, the following AI tools were used during develop
 - Smart theme toggle with emoji transition effect
 - Section-aware animations and ripple effects
 - AI-generated enhancements for clarity and UX polish
-
----
-
-## 📊 Judging Criteria Mapping
-
-| Criterion | Implementation |
-|----------|----------------|
-| Design Accuracy (40%) | Faithfully replicated design from assets |
-| Responsiveness (25%) | Fully responsive from mobile to desktop |
-| Enhancements (20%) | 10+ subtle UX improvements & animations |
-| Code Quality (15%) | Clean, modular HTML/CSS/JS with Tailwind |
 
 ---
 
